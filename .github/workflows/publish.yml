@@ -1,0 +1,26 @@
+# Generate documentation and publish to GitHub Pages (inspired by https://github.com/0install/docs/blob/master/.github/workflows/publish.yml)
+name: Publish
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone repo
+        uses: actions/checkout@main
+      - name: Set up Python
+        uses: actions/setup-python@main
+        with:
+          python-version: 3.8.x
+      - name: Install mkdocs
+        run: pip install -r requirements.txt
+      - name: Build documentation
+        run: mkdocs build --strict
+      - name: Publish documentation
+        if: github.event.ref == 'refs/heads/main'
+        uses: peaceiris/actions-gh-pages@main
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          force_orphan: true
+          publish_dir: site
+          cname: die.mrmeeseeks.net

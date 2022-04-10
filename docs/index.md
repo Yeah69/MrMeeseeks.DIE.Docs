@@ -1,17 +1,7 @@
-# Welcome to MkDocs
+# Welcome to MrMeeseeks.DIE
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+DIE is a secret agency organized by a bunch of Mr. Meeseekses. Its goal is to gather the information necessary to resolve your dependencies. Therefore, …
 
-## Commands
+> The acronym DIE stands for **D**ependency **I**njection DI**E**
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
-
-## Project layout
-
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+Send out Mr. Meeseeks spies in order to gather crucial information and let the secret agency DIE compose these info in order to build factory methods which create instances of types of your choice.

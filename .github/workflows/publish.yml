@@ -23,4 +23,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           force_orphan: true
           publish_dir: site
-          #cname: die.mrmeeseeks.net
+          cname: die.mrmeeseeks.dev

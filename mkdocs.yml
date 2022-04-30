@@ -2,5 +2,6 @@ site_name: MrMeeseeks.DIE
 site_url: http://die.mrmeeseeks.net/
 nav:
     - Home: index.md
+    - Configuration: configuration.md
     - About: about.md
 theme: readthedocs

@@ -12,7 +12,6 @@ MrMeeseeks.DIE (in this documentation just referred to as DIE) is a compile-time
 
 - Concepts
     - Purpose-focused registrations (instead of implementation-focused)
-    - Spying
     - Scoping
 - Async support
     - Wrapping

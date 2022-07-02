@@ -3,5 +3,6 @@ site_url: http://die.mrmeeseeks.net/
 nav:
     - Home: index.md
     - Configuration: configuration.md
+    - Async Support: async-support.md
     - About: about.md
 theme: readthedocs

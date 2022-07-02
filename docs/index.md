@@ -13,12 +13,9 @@ MrMeeseeks.DIE (in this documentation just referred to as DIE) is a compile-time
 - Concepts
     - Purpose-focused registrations (instead of implementation-focused)
     - Scoping
-- Async support
-    - Wrapping
-    - Async creation
-    - Disposal
-- Configuration
-- Decorators
+- [Async support](async-support.md)
+- [Configuration](configuration.md)
+- [Decorators](decorators.md)
 - Composites
 - Lazy & Func
 - Scoped Instances

@@ -1,14 +1,3 @@
-# Key Points
-
-- Use async initializers if you need to call asynchronous methods during instantiation
-- Wrap asynchronous dependencies into a `ValueTask<T>` or a `Task<T>` if you don't want the container to await the async initialization before injection. Otherwise, …
-- The async dependencies will get awaited and therefore the sync `CreateFunction` will be discarded from code generation
-- DIE will never use blocking calls in order to make asynchronous instantiations synchronous
-- DIE will never switch the synchronization contex in the generated code
-  - Therefore, no use of `Task.Run(…)`
-  - Therefore, no use of `await MethodAsync().ConfigureAwait(false)`
-- DIE will prefer to generate code with use of `ValueTask`s over `Task`s
-
 # Async Support
 
 DIE supports asynchronous programming with three aspects:
@@ -16,6 +5,7 @@ DIE supports asynchronous programming with three aspects:
 1. Async initializer
 1. Async `CreateFunction`
 1. (Value)Task-wrapped dependencies
+1. Async disposal
 
 ## Async Initializer
 
@@ -75,9 +65,24 @@ Another use case is whenever you want to start the construct the depending insta
 
 If the use cases aren't relevant to you and in case of asynchronous initializations you won't need a synchronous `CreateFunction`, you can just inject the dependencies directly like usual. Wrapping is just an alternative that is supported by DIE.
 
+## Async Disposal
+
+DIE will always let the container implement `IAsyncDisposable`. Therefore, if you would like to make sure that the container is always disposed cleanly use the `IAsyncDisposable` interface for disposal. If the container has to track any dependency implementing `IAsyncDisposable`, then the `IDisposable` of the container will be discarded because at that point it won't be a valid option anymore (without blocking calls).
+
 ## Remarks On Generated Code
 
 - Whenever suitable DIE will prefer a `ValueTask<T>` as the return type for async function
   - Exceptions are where an explicit `Task<T>` is expected
 - When necessary DIE can and will from `ValueTask<T>` to `Task<T>` and vice versa
   - please note that when DIE is force to transform into `Task<T>` that it will mean more allocations on the heap which might have been prevented
+
+## Summary
+
+- Use async initializers if you need to call asynchronous methods during instantiation
+- Wrap asynchronous dependencies into a `ValueTask<T>` or a `Task<T>` if you don't want the container to await the async initialization before injection. Otherwise, …
+- The async dependencies will get awaited and therefore the sync `CreateFunction` will be discarded from code generation
+- DIE will never use blocking calls in order to make asynchronous instantiations synchronous
+- DIE will never switch the synchronization contex in the generated code
+  - Therefore, no use of `Task.Run(…)`
+  - Therefore, no use of `await MethodAsync().ConfigureAwait(false)`
+- DIE will prefer to generate code with use of `ValueTask`s over `Task`s

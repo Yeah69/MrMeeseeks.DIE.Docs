@@ -4,7 +4,7 @@ DIE is a secret agency organized by a bunch of Mr. Meeseekses. Its goal is to ga
 
 > The acronym DIE stands for **D**ependency **I**njection DI**E**
 
-Send out Mr. Meeseeks spies in order to gather crucial information and let the secret agency DIE compose these info in order to build factory methods which create instances of types of your choice.
+Let the secret agency DIE compose these info in order to build factory methods which create instances of types of your choice.
 
 ## Introduction
 
@@ -21,9 +21,14 @@ MrMeeseeks.DIE (in this documentation just referred to as DIE) is a compile-time
 - Scoped Instances
 - Collections
 - ValueTuple
-- Type Initializers
+- Initializers
     - Sync
     - Async (Task & ValueTask)
 - Nullability
-- Custom factories, properties and fields
+- User-defined Elements
+  - Factories (functions, properties, fields)
+  - AddForDisposal(Async)
+  - Constructor Parameters
 - Naming rules of containers
+- Disposal
+- [Glossary](glossary.md)

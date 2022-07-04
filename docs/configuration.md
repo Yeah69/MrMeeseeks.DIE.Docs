@@ -57,6 +57,10 @@ For every aggregation and choice configuration there is a filter configuration w
 
 It's important to note that filters are only applied at "the beginning" of the configured scope. Thus, you can only filter aggregations and choices set in the parent scope from configuration's perspective.
 
+## More Detailed Articles
+
+[Implementations](configuration/aggregation-implementation.md)
+
 ## Scopes
 
 In context of the configuration three levels of scopes do exist:

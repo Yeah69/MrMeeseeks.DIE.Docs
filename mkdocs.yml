@@ -4,5 +4,6 @@ nav:
     - Home: index.md
     - Configuration: configuration.md
     - Async Support: async-support.md
+    - Glossary: glossary.md
     - About: about.md
 theme: readthedocs

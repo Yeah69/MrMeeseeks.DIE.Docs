@@ -59,7 +59,11 @@ It's important to note that filters are only applied at "the beginning" of the c
 
 ## More Detailed Articles
 
-[Implementations](configuration/aggregation-implementation.md)
+[Implementations](configuration/implementations.md)
+
+[Disposal](configuration/disposal.md)
+
+[Decorator/Composite](configuration/decorator-composite.md)
 
 ## Scopes
 

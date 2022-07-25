@@ -29,6 +29,6 @@ MrMeeseeks.DIE (in this documentation just referred to as DIE) is a compile-time
   - Factories (functions, properties, fields)
   - AddForDisposal(Async)
   - Constructor Parameters
-- Naming rules of containers
+- [Naming rules](naming-rules.md)
 - Disposal
 - [Glossary](glossary.md)

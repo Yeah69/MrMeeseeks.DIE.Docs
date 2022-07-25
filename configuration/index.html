@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="http://die.mrmeeseeks.net/configuration/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Configuration - MrMeeseeks.DIE</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Configuration";
+        var mkdocs_page_input_path = "configuration.md";
+        var mkdocs_page_url = "/configuration/";
+      </script>
+    
+    <script src="../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> MrMeeseeks.DIE
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">Configuration</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#minimal-sample">Minimal sample</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#use-cases-of-configuration">Use cases of configuration</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#aggregating-choosing-and-filtering">Aggregating, Choosing, and Filtering</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#aggregation">Aggregation</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#choice">Choice</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#filter">Filter</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#more-detailed-articles">More Detailed Articles</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#scopes">Scopes</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../async-support/">Async Support</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../glossary/">Glossary</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../about/">About</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">MrMeeseeks.DIE</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>Configuration</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="configuration">Configuration</h1>
+<p>The following characteristics have a high value for DIE:</p>
+<ol>
+<li>Unambiguity</li>
+<li>Convenience</li>
+</ol>
+<p>This means DIE tries to be as comfortable as possible while always maintaining unambiguity.</p>
+<h2 id="minimal-sample">Minimal sample</h2>
+<p>Let's show that by going through the minimal sample:</p>
+<pre><code class="language-csharp">internal interface IInterface {}
+
+internal class Class : IInterface {}
+
+[AllImplementationsAggregation]
+[CreateFunction(typeof(IInterface), &quot;Create&quot;)]
+internal partial class Container {}
+</code></pre>
+<p>The <code>CreateFunctionAttribute</code> will lead to the generation of following three functions:</p>
+<ul>
+<li><code>public IInterface Create()</code></li>
+<li><code>public Task&lt;IInterface&gt; CreateAsync()</code></li>
+<li><code>public ValueTask&lt;IInterface&gt; CreateValueAsync()</code></li>
+</ul>
+<p>Each of which will return an instance of type <code>Class</code> either in synchronous or asynchronous fashion.</p>
+<p>The <code>AllImplementationsAggregation</code> is the way to tell the container to consider all implementations, which are accessible, of the whole code base. This includes the referenced assemblies as well (which also includes the .Net assemblies). For this sample it would be sufficient to just configure the sole implementation explicitly. However, using <code>AllImplementationsAggregation</code> is a more versitile approach, as you could now just add more implementations without needing to alter the configuration. Thus, this approach seems to be more fitting for a minimalistic sample. Also it shows the convenience-based approach that DIE takes.</p>
+<p>Another aspect which is convenient in this sample is that you don't need to register to the implementation <code>Class</code> to be used for the interface <code>IInterface</code>. That's because for <code>IInterface</code> there is only one known implementation <code>Class</code> (and it has only one constructor - the implicit default one). From the perspective of the container there is only one possible way to resolve <code>IInterface</code> and therefore, the container can decide on it's own without the need of you telling it explicitly.</p>
+<p>However, if there would be further implementations for the interface known to the container, then it wouldn't compile. In this case you would need to extend the configuration by telling the container which of the implementations should be used for the interface. That way the unambiguity is maintained.</p>
+<h2 id="use-cases-of-configuration">Use cases of configuration</h2>
+<p>Unfortunately, even the finest of code bases cannot be modeled in such a way that the container is able to automatically resolve everything as soon as they reach a certain amount content or complexity. There maybe configurations needed in order to use advanced features like decorators &amp; composites or in order to resolve ambiguities like multiple implementations of interfaces or multiple constructors of implementations. Therefore, DIE has configuration features, so you should be able to teach your intentions to the container.</p>
+<h2 id="aggregating-choosing-and-filtering">Aggregating, Choosing, and Filtering</h2>
+<p>Most of DIE's configuration feature fall into one of the categories: Aggregation, Choice, Filter.</p>
+<h3 id="aggregation">Aggregation</h3>
+<p>Aggregation is about gathering knowledge. The container will make decision based on the aggregated knowledge only. If a container is configured so that it only knows of one implementation of an interface which actually has multiple implementations, then the container would still act as if this interface has only one implemetation.</p>
+<h3 id="choice">Choice</h3>
+<p>Choices are a kind of configuration that let's you resolve ambiguities. For example, if an implementation has multiple constructors. Choices can also be a more comfortable alternative to filtering. Another example, if an interface has multiple implementations you can aggregate all implementations and choose one of them for the interface. That way it is possible to inject dependencies of the interface type and collection of the interface type (<code>IReadOnlyList&lt;IInterface&gt;</code>) in the same container(/scope).</p>
+<h3 id="filter">Filter</h3>
+<p>For every aggregation and choice configuration there is a filter configuration which does the exact opposite (filters aggregated elements or removes choices).</p>
+<p>It's important to note that filters are only applied at "the beginning" of the configured scope. Thus, you can only filter aggregations and choices set in the parent scope from configuration's perspective.</p>
+<h2 id="more-detailed-articles">More Detailed Articles</h2>
+<p><a href="implementations/">Implementations</a></p>
+<p><a href="disposal/">Disposal</a></p>
+<p><a href="decorator-composite/">Decorator/Composite</a></p>
+<h2 id="scopes">Scopes</h2>
+<p>In context of the configuration three levels of scopes do exist:</p>
+<ol>
+<li>Assembly</li>
+<li>Container</li>
+<li>(Transient)Scope</li>
+</ol>
+<p>In the currently configured level the configurations of the previous level get applied first, then the filter configuration and then the aggregations and choices.</p>
+<p>If you don't need to write a DI-container implementation yourself and therefore don't need to have a lot of containers in the test project, then the benefit of having an assembly level configuration might not be obvious. Usually, one single container would be sufficient for one code base and I would actually also recommend to only have one container. If not for sharing configurations between multiple containers, why would you need an assembly level configuration then? A simple examplary use case would be: you would like to aggregate all implementations at container level but with a few exceptions which should be left out. An easy way to accomplish that would be to aggregate all implementations at assembly level and filter(/opt-out) the exceptions at container level.</p>
+<p>Another important aspect to note is that configurations of TransientScopes and Scopes alike will inherit the configuration of the container that they're in. That means configuration-wise TransientScopes and Scopes are peers.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href=".." class="btn btn-neutral float-left" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../async-support/" class="btn btn-neutral float-right" title="Async Support">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href=".." style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../async-support/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

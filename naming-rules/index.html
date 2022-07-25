@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="http://die.mrmeeseeks.net/naming-rules/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Naming Rules - MrMeeseeks.DIE</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Naming Rules";
+        var mkdocs_page_input_path = "naming-rules.md";
+        var mkdocs_page_url = "/naming-rules/";
+      </script>
+    
+    <script src="../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> MrMeeseeks.DIE
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../configuration/">Configuration</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../async-support/">Async Support</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../glossary/">Glossary</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../about/">About</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">MrMeeseeks.DIE</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>Naming Rules</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="naming-rules">Naming Rules</h1>
+<p>Container classes (i.e. classes which get at least one <code>CreateFunction</code>-attribute applied) will be used by DIE to generate code into it and can be use by you as the consumer. In principal, you can give this class any member you would like. However, in order to prevent collisions of identifiers of members of the generated code and your code DIE has some naming rules for container classes. You'll need to follow them, but rest assured that the validation of DIE will check any violation and point you to the violating member.</p>
+<p>The naming rules don't only apply to container classes but to (transient) scope classes in the same way.</p>
+<p>There a three stages to the naming rules. Sorted descendingly by strictness:</p>
+<ol>
+<li><strong>Member identifiers that you aren't allowed to use fall into two categories:</strong></li>
+<li><strong>Don't use identifiers like <code>{number}_{number}</code> or identifiers with the suffix <code>_{number}_{number}</code> on any member.</strong> With a few exceptions all of the generated code will use this pattern. These paterns are deliberately chosen cryptically, so that the prohibition to use them can be tolerated as well as possible.</li>
+<li><strong><code>Dispose</code> &amp; <code>DisposeAsync</code> is reserved for the generated code as well.</strong> If possible DIE will generate this function so you are not allowed to do that on your own. If you need to append some instances for disposal manually, then you can use the special user-defined elements for that (<strong>todo reference to the user-defined element documentation</strong>). </li>
+<li><strong>Use identifiers for members with the prefix "DIE_" only for user-defined elements.</strong> To an extend you can chose the name of certain user-defined element freely. However, there are constraints involved which are specific to the kind of user-defined element which you would like to use.</li>
+<li><strong>Every identifier that doesn't match the above rules is allowed to be chosen freely by you.</strong> In that case DIE will guarantee you to be collision-free with the generated code.</li>
+</ol>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

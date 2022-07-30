@@ -65,6 +65,8 @@ It's important to note that filters are only applied at "the beginning" of the c
 
 [Decorator/Composite](configuration/decorator-composite.md)
 
+[Generics](configuration/generics.md)
+
 ## Scopes
 
 In context of the configuration three levels of scopes do exist:

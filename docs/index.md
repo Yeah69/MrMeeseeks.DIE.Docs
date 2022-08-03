@@ -15,8 +15,7 @@ MrMeeseeks.DIE (in this documentation just referred to as DIE) is a compile-time
     - Scoping
 - [Async support](async-support.md)
 - [Configuration](configuration.md)
-- [Decorators](decorators.md)
-- Composites
+- [Decorators & Composites](decorators-composites.md)
 - Lazy & Func
 - Scoped Instances
 - Collections

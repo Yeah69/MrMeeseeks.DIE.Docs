@@ -57,7 +57,7 @@ For every aggregation and choice configuration there is a filter configuration w
 
 It's important to note that filters are only applied at "the beginning" of the configured scope. Thus, you can only filter aggregations and choices set in the parent scope from configuration's perspective.
 
-## More Detailed Articles
+## Descriptions Of The Attributes
 
 [Implementations](configuration/implementations.md)
 
@@ -66,6 +66,8 @@ It's important to note that filters are only applied at "the beginning" of the c
 [Decorator/Composite](configuration/decorator-composite.md)
 
 [Generics](configuration/generics.md)
+
+[Miscellaneous](configuration/miscellaneous.md)
 
 ## Scopes
 

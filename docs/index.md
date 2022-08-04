@@ -24,10 +24,7 @@ MrMeeseeks.DIE (in this documentation just referred to as DIE) is a compile-time
     - Sync
     - Async (Task & ValueTask)
 - Nullability
-- User-defined Elements
-  - Factories (functions, properties, fields)
-  - AddForDisposal(Async)
-  - Constructor Parameters
+- [User-defined Elements](user-defined-elements.md)
 - [Naming rules](naming-rules.md)
 - Disposal
 - [Glossary](glossary.md)

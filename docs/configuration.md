@@ -39,6 +39,75 @@ However, if there would be further implementations for the interface known to th
 
 Unfortunately, even the finest of code bases cannot be modeled in such a way that the container is able to automatically resolve everything as soon as they reach a certain amount content or complexity. There maybe configurations needed in order to use advanced features like decorators & composites or in order to resolve ambiguities like multiple implementations of interfaces or multiple constructors of implementations. Therefore, DIE has configuration features, so you should be able to teach your intentions to the container.
 
+## Property-focused Configurations
+
+Usually DI-container choose an implementation-focused way for the configurations. That means that you start with the implementation and then append properties (e.g. scoping, transitivity and so on) to it. DIE chooses another way.
+
+DIE inverses the traditional configuration principle by focusing on the properties. The configuration attributes represent properties and collect implementations which should get them applied. For example, the `ContainerInstanceImplementationAggregation`-attribute collects implementation which should be instantiated only once for the whole container and shared everywhere in use.
+
+## Abstraction Configurations
+
+You can also register abstractions (e.g. interfaces). In that case, however, not the abstractions themselves get the properties applied, but all considered(/registered) implementations that implement or inherit from the abstraction. That way you can use marker interfaces and don't need to register every implementation to a property individually. For example, the `ContainerInstanceImplementationAggregation`-attribute has the alternative `ContainerInstanceAbstractionAggregation`-attribute.
+
+Marker interfaces can only be used by your own code. Therefore, even if you decide to use marker interfaces using "implementation"-attributes to assigning properties to implementations that are outside (e.g. types from .Net) may still be the only feasible way.
+
+### Recommended Marker Interfaces And Their Configurations
+
+The marker interfaces:
+
+```csharp
+namespace MrMeeseeks.DIE.Sample;
+
+public interface IContainerInstance { }
+public interface ITransientScopeInstance { }
+public interface IScopeInstance { }
+public interface ITransientScopeRoot { }
+public interface IScopeRoot { }
+public interface ITransient { }
+public interface ISyncTransient { }
+public interface IAsyncTransient { }
+public interface IDecorator<T> { }
+public interface IComposite<T> { }
+public interface ITypeInitializer
+{
+    void Initialize();
+}
+public interface ITaskTypeInitializer
+{
+    Task InitializeAsync();
+}
+public interface IValueTaskTypeInitializer
+{
+    ValueTask InitializeAsync();
+}
+``` 
+
+The configurations of the marker interfaces:
+
+```csharp
+using System.Threading.Tasks;
+using MrMeeseeks.DIE.Configuration.Attributes;
+using MrMeeseeks.DIE.Sample;
+
+[assembly:ContainerInstanceAbstractionAggregation(typeof(IContainerInstance))]
+[assembly:TransientScopeInstanceAbstractionAggregation(typeof(ITransientScopeInstance))]
+[assembly:ScopeInstanceAbstractionAggregation(typeof(IScopeInstance))]
+[assembly:TransientScopeRootAbstractionAggregation(typeof(ITransientScopeRoot))]
+[assembly:ScopeRootAbstractionAggregation(typeof(IScopeRoot))]
+[assembly:TransientAbstractionAggregation(typeof(ITransient))]
+[assembly:SyncTransientAbstractionAggregation(typeof(ISyncTransient))]
+[assembly:AsyncTransientAbstractionAggregation(typeof(IAsyncTransient))]
+[assembly:DecoratorAbstractionAggregation(typeof(IDecorator<>))]
+[assembly:CompositeAbstractionAggregation(typeof(IComposite<>))]
+[assembly:TypeInitializer(typeof(ITypeInitializer), nameof(ITypeInitializer.Initialize))]
+[assembly:TypeInitializer(typeof(ITaskTypeInitializer), nameof(ITaskTypeInitializer.InitializeAsync))]
+[assembly:TypeInitializer(typeof(IValueTaskTypeInitializer), nameof(IValueTaskTypeInitializer.InitializeAsync))]
+```
+
+The place of the marker interfaces can be in a separate assemby, and therefore, doesn't need to know anything about DIE. Only the place of the configurations needs to reference the marker interface's namespace and DIE.
+
+With the use of marker interface the container configuration becomes much more consice and focuses more on the specialized settings. However, with DIE it is your decision whether you'd like to use a "marker interface" configuration style.
+
 ## Aggregating, Choosing, and Filtering
 
 Most of DIE's configuration feature fall into one of the categories: Aggregation, Choice, Filter.

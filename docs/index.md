@@ -10,20 +10,28 @@ Let the secret agency DIE compose these info in order to build factory methods w
 
 MrMeeseeks.DIE (in this documentation just referred to as DIE) is a compile-time dependency injection container for .Net. As such it generates factory methods which create instances that you need. Instead of relying on reflection the generated code uses the good old `new` operator to create instances like you would probably do yourself if you'd create a pure DI container.
 
-- Concepts
-    - Scoping
-- [Async support](async-support.md)
 - [Configuration](configuration.md)
+- [Naming rules](naming-rules.md)
+- [Scoping](scoping.md)
+- [User-defined Elements](user-defined-elements.md)
+- [Disposal](disposal.md)
+- Injections
+    - Instance Injection
+        - Implementation
+        - Abstraction (interfaces, abstract class types)
+    - Collection Injection
+        - IEnumerable<…>, IReadOnlyList<…>, IReadOnlyCollection<…>
+    - Factory Injection
+        - Func
+        - Lazy
+    - Scope Injection
+    - Specials
+        - Generics
+        - ValueTuple
+        - Nullability
+- [Async support](async-support.md)
 - [Decorators & Composites](decorators-composites.md)
-- Lazy & Func
-- Scoped Instances
-- Collections
-- ValueTuple
 - Initializers
     - Sync
     - Async (Task & ValueTask)
-- Nullability
-- [User-defined Elements](user-defined-elements.md)
-- [Naming rules](naming-rules.md)
-- [Disposal](disposal.md)
 - [Glossary](glossary.md)

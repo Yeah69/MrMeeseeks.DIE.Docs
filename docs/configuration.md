@@ -56,8 +56,6 @@ Marker interfaces can only be used by your own code. Therefore, even if you deci
 The marker interfaces:
 
 ```csharp
-namespace MrMeeseeks.DIE.Sample;
-
 public interface IContainerInstance { }
 public interface ITransientScopeInstance { }
 public interface IScopeInstance { }
@@ -85,10 +83,6 @@ public interface IValueTaskTypeInitializer
 The configurations of the marker interfaces:
 
 ```csharp
-using System.Threading.Tasks;
-using MrMeeseeks.DIE.Configuration.Attributes;
-using MrMeeseeks.DIE.Sample;
-
 [assembly:ContainerInstanceAbstractionAggregation(typeof(IContainerInstance))]
 [assembly:TransientScopeInstanceAbstractionAggregation(typeof(ITransientScopeInstance))]
 [assembly:ScopeInstanceAbstractionAggregation(typeof(IScopeInstance))]

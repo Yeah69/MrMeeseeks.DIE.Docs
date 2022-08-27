@@ -82,7 +82,20 @@ internal class Parent
 
 ### Generics
 
-[TODO]
+Instance injections support generic types.
+
+Example:
+
+```csharp
+internal record Dependency<T>;
+
+internal class Parent
+{
+    internal readonly Dependency<int> _dependency;
+    internal Parent(Dependency<int> dependency) => // is an instance of type Dependency<int>
+        _dependency = dependency;
+}
+```
 
 ## Collection Injection
 
@@ -117,21 +130,64 @@ internal class Parent
 
 ## Factory Injection
 
+Instead of injecting the dependency directly with factory injections have the option to inject generated factories which will create the dependencies on demand. 
 
+DIE support `Func<…>` and `Lazy<…>` as factory wrapper types. The created dependency type (the last generic parameter for `Func<…>`s and the only generic parameter for `Lazy<…>`) may be any other type of injection (i.e. instance, collection, or scope injection).
 
-[TODO]
+As soon as the scope under which the factory was instantiated is disposed, no further usage of the factory is allowed. If still invoked from a disposed scope, then the factory will throw an exception.
 
-//    - Factory Injection
+### Func
 
-//        - Func
+The parameters of a `Func<…>` factory are supported as well. The parameters are used as overrides for the remaining resolution, if not overriden again at a later point. The overriding semantic is an inspiration from another great DI-container: Shout out to DryIoc!
 
-//        - Lazy
+Example:
+
+```csharp
+internal record Dependency(int Number, string Text);
+
+internal class Parent
+{
+    internal readonly Func<int, string, Dependency> _dependencyFactory;
+    internal Parent(Func<int, string, Dependency> dependencyFactory) => // is a factory that creates an instance of type Dependency
+        _dependencyFactory = dependencyFactory;
+}
+```
+
+### Lazy
+
+While technically being no functor ("first-citizen function") itself, `Lazy<…>`s get a functor injected which it then uses. In DIE `Lazy<…>`s are interpreted as parameterless factories which can only create one single instance but where the creation can be delayed until the first usage.
+
+Example:
+
+```csharp
+internal record Dependency(int Number, string Text);
+
+internal class Parent
+{
+    internal readonly Lazy<Dependency> _dependency;
+    internal Parent(Lazy<Dependency> dependency) => // is a lazy object that creates an instance of type Dependency upon first usage
+        _dependency = dependency;
+}
+```
 
 ## Scope Injection
 
-[TODO]
+Scope injection are much like instance injection if looking at the usage side. The difference is that the scope injection will start a new (transient) scope and create the injected instance (which is called scope root) from that there. For a more comprehensive explanation see the [scoping docu page](scoping.md).
 
-//    - Scope Injection
+Example:
+
+```csharp
+internal record Dependency;
+
+internal record ScopeRoot(Dependency Dependency) : IScopeRoot;
+
+internal class Parent
+{
+    internal readonly ScopeRoot _scopeRoot;
+    internal Parent(ScopeRoot scopeRoot) => // Starts a new scope in which the ScopeRoot- and the Dependency-instance is created
+        _scopeRoot = scopeRoot;
+}
+```
 
 ## ValueTuple
 

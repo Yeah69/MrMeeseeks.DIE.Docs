@@ -15,21 +15,9 @@ MrMeeseeks.DIE (in this documentation just referred to as DIE) is a compile-time
 - [Scoping](scoping.md)
 - [User-defined Elements](user-defined-elements.md)
 - [Disposal](disposal.md)
-- Injections
-    - Instance Injection
-        - Implementation
-        - Abstraction (interfaces, abstract class types)
-    - Collection Injection
-        - IEnumerable<…>, IReadOnlyList<…>, IReadOnlyCollection<…>
-    - Factory Injection
-        - Func
-        - Lazy
-    - Scope Injection
-    - Specials
-        - Generics
-        - ValueTuple
-        - Nullability
-- [Async support](async-support.md)
+- [Injections](injections.md)
+- [Async Support](async-support.md)
+- Generics support
 - [Decorators & Composites](decorators-composites.md)
 - Initializers
     - Sync

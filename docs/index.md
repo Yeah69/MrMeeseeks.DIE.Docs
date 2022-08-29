@@ -19,7 +19,5 @@ MrMeeseeks.DIE (in this documentation just referred to as DIE) is a compile-time
 - [Async Support](async-support.md)
 - Generics support
 - [Decorators & Composites](decorators-composites.md)
-- Initializers
-    - Sync
-    - Async (Task & ValueTask)
+- [Initializers](initializers.md)
 - [Glossary](glossary.md)

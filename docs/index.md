@@ -17,7 +17,7 @@ MrMeeseeks.DIE (in this documentation just referred to as DIE) is a compile-time
 - [Disposal](disposal.md)
 - [Injections](injections.md)
 - [Async Support](async-support.md)
-- Generics support
+- [Generics support](generics-support.md)
 - [Decorators & Composites](decorators-composites.md)
 - [Initializers](initializers.md)
 - [Glossary](glossary.md)

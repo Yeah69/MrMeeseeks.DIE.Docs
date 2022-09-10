@@ -44,9 +44,9 @@ internal class Parent
 
 ### Abstraction
 
-Whenever an abstraction type has to be injected, DIE will per default will use the single known implementation type which implements the abstration in its place. 
+Whenever an abstraction type (interface or abstract class) has to be injected, DIE will per default will use the single known implementation type which implements the abstration in its place. 
 
-If multiple implementation are known, then usage of configuration features like the implementation choice or a user-defined factory are mandetory for selting an implementation unabigously. 
+If multiple implementation are known, then usage of configuration features like the implementation choice or a user-defined factory are mandetory for selecting an implementation unambigously. 
 
 Example:
 
@@ -189,9 +189,9 @@ internal class Parent
 }
 ```
 
-## ValueTuple
+## (Value)Tuple
 
-ValueTuple injection can be seen as special case, because it can be understood as a combinations of injections. For each type of the tuple an own resolution will be started very similar to how it would have happen to an ordinary dependency injection. The result of these resolutions will be composed into the tuple. DIE supports both, the syntax and the non-syntax ValueTuple.
+Tuple injection can be seen as special case, because it can be understood as a combinations of injections. For each type of the tuple an own resolution will be started very similar to how it would have happen to an ordinary dependency injection. The result of these resolutions will be composed into the tuple. DIE supports `Tuple<…>` both, the syntax and the non-syntax `ValueTuple<…>`.
 
 Example:
 

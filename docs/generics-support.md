@@ -4,13 +4,43 @@ DIE support usage of generic types. This involves the configuration and the usag
 
 ## Configuration
 
-Generic implementations can be configured for the same things as the non-generic implementations. However, generic implementations have to be 
+Generic implementations can be configured for the same things as the non-generic implementations. However, generic implementations have to be passed as unbound types. This means that no concrete generic type parameter is passed but left blank. Configurations to this unbound generic type then apply to all of its bound generic type variants. For example:
 
-// Basic generics support
+```csharp
+[ContainerInstanceImplementationAggregation(
+    typeof(DependencyA<>),
+    typeof(DependencyB<,>))]
+```
 
-// Implementations
+This'll configure all variants of the generic implementation `DependencyA<…>` (e.g. `DependencyA<int>` or `DependencyA<string>`) to be a container instance. Same logic applies to `DependencyB<…,…>` which has two generic parameters.
 
-// Interfaces
+## Usage
+
+Fortunately, C# doesn't allow usage of unbound generic types except for in the `typeof` operator. That makes usage of implementation instance injections straightforward:
+
+```csharp
+internal class Dependency<T0> { }
+
+internal class Parent
+{
+    internal Parent(Dependency<int> dependency) { }
+}
+```
+
+Generic interface instance injections get more interesting. A straightforward usage is only possible for cases each of the implementation types generic parameters can be determined based on the interface type. For example:
+
+```csharp
+public interface IInterface<T0, T1> { }
+
+internal class Dependency<T0, T1> : IInterface<T1, T0> { }
+
+internal class Parent
+{
+    internal Parent(IInterface<int, string> dependency) { } // A Dependency<string, int> instance
+}
+```
+
+Cases with undeterminable generic type parameters are supported by DIE. However, more specialized configuration would be required, as descibed in the next section …
 
 ## Undeterminable Generic Type Parameters With Interface Injections
 

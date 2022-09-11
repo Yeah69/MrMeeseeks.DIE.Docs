@@ -28,6 +28,29 @@ Or manually insert the package reference into the target `.csproj`:
 <PackageReference Include="MrMeeseeks.DIE" Version="[preferrably the current version]" />
 ```
 
+## Properties Of DIE
+
+- Compile-Time Code Generation 
+    - Incomplete configurations will most likely result in a failed build
+- Unambiguity
+    - Container doesn't resolve ambiguities by assumptions
+    - Configuration features for resolving ambiguities
+- Convenience
+    - Default behaviors intended to decrease required configuration
+    - Marker interfaces
+    - Bulk configuration (e.g. register all implementations with a single configuration)
+- Flexibility
+    - Opt-in configuration style possible
+    - Opt-out configuration style possible
+    - Choose yourself
+- Feature-richness
+    - Scoping
+    - Async support
+    - Generics support
+    - User-defined elements (Factories, custom parameters, …)
+    - Generated Factories (Func<…>, Lazy<…>)
+    - Decorators & Composites
+
 ## Further Docs
 
 - [Getting Started](getting-started.md)

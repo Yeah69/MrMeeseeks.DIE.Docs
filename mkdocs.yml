@@ -2,8 +2,17 @@ site_name: MrMeeseeks.DIE
 site_url: http://die.mrmeeseeks.net/
 nav:
     - Home: index.md
+    - Getting Started: getting-started.md
     - Configuration: configuration.md
+    - Naming Rules: naming-rules.md
+    - Scoping: scoping.md
+    - User-defined Elements: user-defined-elements.md
+    - Disposal: disposal.md
+    - Injections: injections.md
     - Async Support: async-support.md
+    - Generics Support: generics-support.md
+    - Decorators & Composites: decorators-composites.md
+    - Initializers: initializers.md
     - Glossary: glossary.md
     - About: about.md
 theme: readthedocs

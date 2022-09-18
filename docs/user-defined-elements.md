@@ -43,11 +43,11 @@ Instead of customizing the creation of a type this'll allow to override specific
 
 ### Requirements
 
-- Identifier starts with `DIE_ConstrParam`
+- Identifier starts with `DIE_ConstrParams`
 - `private`
 - Non-static
 - void
-- `CustomConstructorParameter`-attribute
+- `UserDefinedConstructorParametersInjection`-attribute
 - Two kinds of parameters allowed
     - Ordinary
     - Out parameters each of which has to match a constructor parameter name & type
@@ -59,7 +59,7 @@ Instead of customizing the creation of a type this'll allow to override specific
 [CreateFunction(typeof(Dependency), "Create")]
 internal sealed partial class Container
 {
-    [CustomConstructorParameter(typeof(Dependency))]
+    [UserDefinedConstructorParametersInjection(typeof(Dependency))]
     private void DIE_ConstrParam_Dependency(OtherDependency otherDependency, out int number) => number = otherDependency.Number;
 }
 ```
@@ -67,7 +67,71 @@ internal sealed partial class Container
 ### Remarks
 
 - The ordinary parameters are method injections and are created the same way as regular constructor and property injections, i.e. same configurations apply.
-- You can match an override multiple constructor parameters
+- You can match and override multiple constructor parameters
+
+## Properties
+
+Instead of customizing the creation of a type this'll allow to override specific properties.
+
+### Requirements
+
+- Identifier starts with `DIE_Props`
+- `private`
+- Non-static
+- void
+- `UserDefinedPropertiesInjection`-attribute
+- Two kinds of parameters allowed
+    - Ordinary
+    - Out parameters each of which has to match a property name & type
+
+
+### Sample
+
+```csharp
+[CreateFunction(typeof(Dependency), "Create")]
+internal sealed partial class Container
+{
+    [UserDefinedPropertiesInjection(typeof(Dependency))]
+    private void DIE_ConstrParam_Dependency(OtherDependency otherDependency, out int Number) => Number = otherDependency.Number;
+}
+```
+
+### Remarks
+
+- The ordinary parameters are method injections and are created the same way as regular constructor and property injections, i.e. same configurations apply.
+- You can match and override multiple properties
+
+## Initializer Parameters
+
+Instead of customizing the creation of a type this'll allow to override specific initializer parameters.
+
+### Requirements
+
+- Identifier starts with `DIE_InitParams`
+- `private`
+- Non-static
+- void
+- `UserDefinedInitializerParametersInjection`-attribute
+- Two kinds of parameters allowed
+    - Ordinary
+    - Out parameters each of which has to match a constructor parameter name & type
+
+
+### Sample
+
+```csharp
+[CreateFunction(typeof(Dependency), "Create")]
+internal sealed partial class Container
+{
+    [UserDefinedInitializerParametersInjection(typeof(Dependency))]
+    private void DIE_ConstrParam_Dependency(OtherDependency otherDependency, out int number) => number = otherDependency.Number;
+}
+```
+
+### Remarks
+
+- The ordinary parameters are method injections and are created the same way as regular constructor and property injections, i.e. same configurations apply.
+- You can match and override multiple initializer parameters
 
 ## Adding For Disposal
 

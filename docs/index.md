@@ -20,7 +20,16 @@ Either search for `MrMeeseeks.DIE` in the nuget manager of the IDE of your choic
 
 Or call following PowerShell-command:
 
-> Install-Package MrMeeseeks.DIE
+```powershell
+Install-Package MrMeeseeks.DIE
+```
+
+
+Alternatively you can use `dotnet`:
+
+```sh
+dotnet add [your project] package MrMeeseeks.DIE
+```
 
 Or manually insert the package reference into the target `.csproj`:
 
@@ -37,19 +46,21 @@ Or manually insert the package reference into the target `.csproj`:
     - Configuration features for resolving ambiguities
 - Convenience
     - Default behaviors intended to decrease required configuration
-    - Marker interfaces
+    - Optionally marker interfaces can be used for configurations
     - Bulk configuration (e.g. register all implementations with a single configuration)
 - Flexibility
     - Opt-in configuration style possible
     - Opt-out configuration style possible
-    - Choose yourself
 - Feature-richness
     - Scoping
     - Async support
     - Generics support
     - User-defined elements (Factories, custom parameters, …)
     - Generated Factories (Func<…>, Lazy<…>)
-    - Decorators & Composites
+    - Decorators & composites
+- Maximum Transparency
+    - Only your configuration code needs to know about DIE
+    - The rest of your code base can stay oblivious
 
 ## Further Docs
 

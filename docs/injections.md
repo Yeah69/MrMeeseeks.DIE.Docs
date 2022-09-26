@@ -25,28 +25,24 @@ Instance injections are ordinary dependency injections. Meaning you declare whic
 
 ### Implementations
 
-Whenever an implementation type has to be injected, DIE will per default inject an instance of exactly that type. Even if the implementation type is a parent class and has inhereting child classes.
-
-However, there is an option to modify this behavior by configuring implementation choices. Alternatively, user-defined factories can be used to alter this behavior as well.
-
 Example:
 
 ```csharp
 internal record Dependency;
 
-internal class Parent
+internal class DependencyHolder
 {
     internal readonly Dependency _dependency;
-    internal Parent(Dependency dependency) => // is an instance of type Dependency
+    internal DependencyHolder(Dependency dependency) => // is an instance of type Dependency
         _dependency = dependency;
 }
 ```
 
+Whenever an implementation type has to be injected, DIE will per default inject an instance of exactly that type. Even if the implementation type is a parent class and has inhereting child classes.
+
+However, there is an option to modify this behavior by configuring implementation choices. Alternatively, user-defined factories can be used to alter this behavior as well.
+
 ### Abstraction
-
-Whenever an abstraction type (interface or abstract class) has to be injected, DIE will per default will use the single known implementation type which implements the abstration in its place. 
-
-If multiple implementation are known, then usage of configuration features like the implementation choice or a user-defined factory are mandetory for selecting an implementation unambigously. 
 
 Example:
 
@@ -55,61 +51,53 @@ internal interface IDependency {}
 
 internal record Dependency : IDependency;
 
-internal class Parent
+internal class DependencyHolder
 {
     internal readonly IDependency _dependency;
-    internal Parent(IDependency dependency) => // is an instance of type Dependency
+    internal DependencyHolder(IDependency dependency) => // is an instance of type Dependency
         _dependency = dependency;
 }
+
+Whenever an abstraction type (interface or abstract class) has to be injected, DIE will per default will use the single known implementation type which implements the abstration in its place. 
+
+If multiple implementation are known, then usage of configuration features like the implementation choice or a user-defined factory are mandetory for selecting an implementation unambigously. 
 ```
 
 ### Nullability
-
-If the dependency type is a nullable abstraction type and DIE can't chose a singular implementation (no implementations; multiple implementations; no implementation choice), then DIE will inject the null value instead.
 
 Example:
 
 ```csharp
 internal interface IDependency {}
 
-internal class Parent
+internal class DependencyHolder
 {
     internal readonly IDependency? _dependency;
-    internal Parent(IDependency? dependency) => // is null
+    internal DependencyHolder(IDependency? dependency) => // is null
         _dependency = dependency;
 }
 ```
 
-### Generics
+If the dependency type is a nullable abstraction type and DIE can't chose a singular implementation (no implementations; multiple implementations; no implementation choice), then DIE will inject the null value instead.
 
-Instance injections support generic types.
+### Generics
 
 Example:
 
 ```csharp
 internal record Dependency<T>;
 
-internal class Parent
+internal class DependencyHolder
 {
     internal readonly Dependency<int> _dependency;
-    internal Parent(Dependency<int> dependency) => // is an instance of type Dependency<int>
+    internal DependencyHolder(Dependency<int> dependency) => // is an instance of type Dependency<int>
         _dependency = dependency;
 }
 ```
 
+Instance injections support generic types.
+
 ## Collection Injection
-
-Collection Injections aren't constraint inject a singular implementation. Therefore, the injected instance will be a collection type which contains instances for each distinct implementation of its item type as items.
-
-The currently supported collection types are: 
-
-- IEnumerable<…>
-- IReadOnlyList<…>
-- IReadOnlyCollection<…>
-
-If you would like to narrow the used implementations of the collection injection, then you can use an implementation collection choice as a configuration option.
-
-You can also combine the collection type with `ValueTask<…>` or `Task<…>` (e.g. `IReadOnlyList<ValueTask<IDependency>>`), if you might need to wrap asynchronous resolutions of one or multiple implementations.
 
 Example:
 
@@ -120,13 +108,26 @@ internal record DependencyA : IDependency;
 
 internal record DependencyB : IDependency;
 
-internal class Parent
+internal class DependencyHolder
 {
     internal readonly IReadOnlyList<IDependency> _dependencies;
-    internal Parent(IReadOnlyList<IDependency> dependencies) => // is a collection of a DependencyA- and a DependencyB-instance
+    internal DependencyHolder(IReadOnlyList<IDependency> dependencies) => // is a collection of a DependencyA- and a DependencyB-instance
         _dependencies = dependencies;
 }
 ```
+
+Collection Injections aren't constraint inject a singular implementation. Therefore, the injected instance will be a collection type which contains instances for each distinct implementation of its item type as items.
+
+The currently supported collection types are: 
+
+- IEnumerable<…>
+- IReadOnlyList<…>
+- IReadOnlyCollection<…>
+- Arrays
+
+If you would like to narrow the used implementations of the collection injection, then you can use an implementation collection choice as a configuration option.
+
+You can also combine the collection type with `ValueTask<…>` or `Task<…>` (e.g. `IReadOnlyList<ValueTask<IDependency>>`), if you might need to wrap asynchronous resolutions of one or multiple implementations.
 
 ## Factory Injection
 
@@ -138,41 +139,39 @@ As soon as the scope under which the factory was instantiated is disposed, no fu
 
 ### Func
 
-The parameters of a `Func<…>` factory are supported as well. The parameters are used as overrides for the remaining resolution, if not overriden again at a later point. The overriding semantic is an inspiration from another great DI-container: Shout out to DryIoc!
-
 Example:
 
 ```csharp
 internal record Dependency(int Number, string Text);
 
-internal class Parent
+internal class DependencyHolder
 {
     internal readonly Func<int, string, Dependency> _dependencyFactory;
-    internal Parent(Func<int, string, Dependency> dependencyFactory) => // is a factory that creates an instance of type Dependency
+    internal DependencyHolder(Func<int, string, Dependency> dependencyFactory) => // is a factory that creates an instance of type Dependency
         _dependencyFactory = dependencyFactory;
 }
 ```
 
-### Lazy
+The parameters of a `Func<…>` factory are supported as well. The parameters are used as overrides for the remaining resolution, if not overriden again at a later point. The overriding semantic is an inspiration from another great DI-container: Shout out to DryIoc!
 
-While technically being no functor ("first-citizen function") itself, `Lazy<…>`s get a functor injected which it then uses. In DIE `Lazy<…>`s are interpreted as parameterless factories which can only create one single instance but where the creation can be delayed until the first usage.
+### Lazy
 
 Example:
 
 ```csharp
 internal record Dependency(int Number, string Text);
 
-internal class Parent
+internal class DependencyHolder
 {
     internal readonly Lazy<Dependency> _dependency;
-    internal Parent(Lazy<Dependency> dependency) => // is a lazy object that creates an instance of type Dependency upon first usage
+    internal DependencyHolder(Lazy<Dependency> dependency) => // is a lazy object that creates an instance of type Dependency upon first usage
         _dependency = dependency;
 }
 ```
 
-## Scope Injection
+While technically being no functor ("first-citizen function") itself, `Lazy<…>`s get a functor injected which it then uses. In DIE `Lazy<…>`s are interpreted as parameterless factories which can only create one single instance but where the creation can be delayed until the first usage.
 
-Scope injection are much like instance injection if looking at the usage side. The difference is that the scope injection will start a new (transient) scope and create the injected instance (which is called scope root) from that there. For a more comprehensive explanation see the [scoping docu page](scoping.md).
+## Scope Injection
 
 Example:
 
@@ -181,17 +180,17 @@ internal record Dependency;
 
 internal record ScopeRoot(Dependency Dependency) : IScopeRoot;
 
-internal class Parent
+internal class DependencyHolder
 {
     internal readonly ScopeRoot _scopeRoot;
-    internal Parent(ScopeRoot scopeRoot) => // Starts a new scope in which the ScopeRoot- and the Dependency-instance is created
+    internal DependencyHolder(ScopeRoot scopeRoot) => // Starts a new scope in which the ScopeRoot- and the Dependency-instance is created
         _scopeRoot = scopeRoot;
 }
 ```
 
-## (Value)Tuple
+Scope injection are much like instance injection if looking at the usage side. The difference is that the scope injection will start a new (transient) scope and create the injected instance (which is called scope root) from that there. For a more comprehensive explanation see the [scoping docu page](scoping.md).
 
-Tuple injection can be seen as special case, because it can be understood as a combinations of injections. For each type of the tuple an own resolution will be started very similar to how it would have happen to an ordinary dependency injection. The result of these resolutions will be composed into the tuple. DIE supports `Tuple<…>` both, the syntax and the non-syntax `ValueTuple<…>`.
+## (Value)Tuple
 
 Example:
 
@@ -200,10 +199,12 @@ internal record DependencyA;
 
 internal record DependencyB;
 
-internal class Parent
+internal class DependencyHolder
 {
     internal readonly (DependencyA, DependencyB) _tuple;
-    internal Parent((DependencyA, DependencyB) tuple) => // is a tuple of a DependencyA- and a DependencyB-instance
+    internal DependencyHolder((DependencyA, DependencyB) tuple) => // is a tuple of a DependencyA- and a DependencyB-instance
         _tuple = tuple;
 }
 ```
+
+Tuple injection can be seen as special case, because it can be understood as a combinations of injections. For each type of the tuple an own resolution will be started very similar to how it would have happen to an ordinary dependency injection. The result of these resolutions will be composed into the tuple. DIE supports `Tuple<…>` both, the syntax and the non-syntax `ValueTuple<…>`.

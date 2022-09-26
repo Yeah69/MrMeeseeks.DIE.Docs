@@ -113,7 +113,7 @@ mrMeeseeks.Greet();
 
 Now we are using abstractions and have a true dependency (i.e. `MrMeeseeks` depends on an instance of type `ILogger`).
 
-Please note that interfaces don't have to be configured to DIE-containers. If an interface has a single configured implementation, then DIE will chose this implementation when ever an instance of that interface is requested. For such an approach configuring interfaces explicitly isn't required. If an interface has multiple configured implementations, there are configuration options to resolve such situations, but this is a more advanced topic.
+Please note that mapping interaces to a specific implementation is only required if the interface has multiple configured implementations. If the interfaces has a single configured implementation, then DIE will automatically chose it. With multiple implementations a manually configured implementation choice is necessary, but that is a more advanced topic.
 
 ## Generated Code
 

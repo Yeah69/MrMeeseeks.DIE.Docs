@@ -2,68 +2,68 @@
 
 ## Purpose
 
-DIE manages disposables for you automatically and will dispose of them as soon as the container or the (transient) scope is disposed. However, sometimes you like to handle the disposal yourself. In these cases you need to tell the container or the scopes to not manage these specific implementations. 
+DIE automatically manages disposables for you and disposes of them when the container or (temporary) scope is discarded. However, sometimes you want to handle the disposal yourself. In these cases you need to tell the container or scopes not to manage these specific implementations. 
 
-The attributes come in three flavors can be distinguished by the following terms:
+The attributes come in three flavors, which can be distinguished by the following terms:
 
-- **SyncTransient** ignores `IDisposable` implementations for disposal managment.
-- **AsyncTransient** ignores `IAsyncDisposable` implementations for disposal managment. 
-- **Transient** ignores `IDisposable` & `IAsyncDisposable` implementations for disposal managment.
+- **SyncTransient** ignores `IDisposable` implementations for disposal management.
+- **AsyncTransient** ignores `IAsyncDisposable` implementations for disposal management. 
+- **Transient** ignores `IDisposable` & `IAsyncDisposable` implementations for disposal management.
 
 ## Attributes
 
-- **TransientAbstractionAggregationAttribute** Of each given abstraction all their implementations will be ignored for disposal management completely.
+- **TransientAbstractionAggregationAttribute** For any given abstraction, all of its implementations are completely ignored for disposal management.
 ```csharp
 [TransientAbstractionAggregation(typeof(IWillCleanItUpMyself))]
 ```
-- **FilterTransientAbstractionAggregationAttribute** Of each given abstraction all their implementations will be considered for disposal management again.
+- **FilterTransientAbstractionAggregationAttribute** For each given abstraction, all of its implementations are considered again for disposal management.
 ```csharp
 [FilterTransientAbstractionAggregation(typeof(IWillCleanItUpMyselfAsync))]
 ```
-- **TransientImplementationAggregationAttribute** Each given implementation will be ignored for disposal management completely.
+- **TransientImplementationAggregationAttribute** Any given implementation is completely ignored for disposal management.
 ```csharp
 [TransientImplementationAggregation(typeof(DisposeMeAsap))]
 ```
-- **FilterTransientAbstractionAggregationAttribute** Each given implementation will be considered for disposal management again.
+- **FilterTransientAbstractionAggregationAttribute** Each given implementation will be considered again for disposal management.
 ```csharp
 [FilterTransientImplementationAggregation(typeof(DisposeMeAsapAsync))]
 ```
-- **SyncTransientAbstractionAggregationAttribute** Of each given abstraction all their implementations will be ignored for sync disposal management.
+- **SyncTransientAbstractionAggregationAttribute** For any given abstraction, all of its implementations are ignored for sync disposal management.
 ```csharp
 [SyncTransientAbstractionAggregation(typeof(IWillCleanItUpMyself))]
 ```
-- **FilterSyncTransientAbstractionAggregationAttribute** Of each given abstraction all their implementations will be considered for sync disposal management.
+- **FilterSyncTransientAbstractionAggregationAttribute** For each given abstraction, all of its implementations are considered again for sync disposal management.
 ```csharp
 [FilterSyncTransientAbstractionAggregation(typeof(IWillCleanItUpMyself))]
 ```
-- **SyncTransientImplementationAggregationAttribute** Each given implementation will be ignored for sync disposal management.
+- **SyncTransientImplementationAggregationAttribute** Any given implementation will be ignored for sync disposal management.
 ```csharp
 [SyncTransientImplementationAggregation(typeof(DisposeMeAsap))]
 ```
-- **FilterSyncTransientAbstractionAggregationAttribute** Each given implementation will be considered for sync disposal management.
+- **FilterSyncTransientAbstractionAggregationAttribute** Any given implementation will be considered again for sync disposal management.
 ```csharp
 [FilterSyncTransientImplementationAggregation(typeof(DisposeMeAsap))]
 ```
-- **AsyncTransientAbstractionAggregationAttribute** Of each given abstraction all their implementations will be ignored for async disposal management.
+- **AsyncTransientAbstractionAggregationAttribute** For any given abstraction, all of its implementations are ignored for async disposal management.
 ```csharp
 [AsyncTransientAbstractionAggregation(typeof(IWillCleanItUpMyselfAsync))]
 ```
-- **FilterAsyncTransientAbstractionAggregationAttribute** Of each given abstraction all their implementations will be considered for async disposal management.
+- **FilterAsyncTransientAbstractionAggregationAttribute** For each given abstraction, all of its implementations are considered again for async disposal management.
 ```csharp
 [FilterAsyncTransientAbstractionAggregation(typeof(IWillCleanItUpMyselfAsync))]
 ```
-- **AsyncTransientImplementationAggregationAttribute** Each given implementation will be ignored for async disposal management.
+- **AsyncTransientImplementationAggregationAttribute** Any given implementation is ignored for async disposal management.
 ```csharp
 [AsyncTransientImplementationAggregation(typeof(DisposeMeAsapAsync))]
 ```
-- **FilterAsyncTransientAbstractionAggregationAttribute** Each given implementation will be considered for async disposal management.
+- **FilterAsyncTransientAbstractionAggregationAttribute** Any given implementation is considered for async disposal management.
 ```csharp
 [FilterAsyncTransientImplementationAggregation(typeof(DisposeMeAsapAsync))]
 ```
 
 ## Recommendations
 
-- Use the **Transient** flavor if an implementation implements both disposal interfaces and you would like to ignore both.
-    - Or if you would like to have the disposal of the implementation ignored independent of future changes of its disposal interfaces
-- If an implementation implements both disposal interfaces but you would like to have only one of them ignored, use either the **SyncTransient** or the **AsyncTransient** flavor, respectively.
-- Pass `IDisposable` and `IAsyncDisposable` into **TransientAbstractionAggregationAttribute** if you want to practically disable the disposal management of implementations
+- Use the **Transient** flavor when an implementation implements both disposal interfaces and you want to ignore both.
+- Or if you want the implementation's disposal to be ignored regardless of future changes to its disposal interfaces.
+- If an implementation implements both disposal interfaces, but you only want one of them to be ignored, use either the **SyncTransient** or **AsyncTransient** flavor.
+- Pass `IDisposable` and `IAsyncDisposable` to the **TransientAbstractionAggregationAttribute** if you want to effectively disable disposal management for implementations.

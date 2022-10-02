@@ -37,7 +37,7 @@ Or manually add the package reference to the target `.csproj`:
 <PackageReference Include="MrMeeseeks.DIE" Version="[preferrably the current version]" />
 ```
 
-## Properties Of DIE
+## Characteristics Of DIE
 
 - Compile-Time Code Generation 
     - Incomplete configurations will most likely result in a failed build

@@ -45,17 +45,17 @@ However, if there were other implementations for the interface that the containe
 
 Unfortunately, even the best codebases cannot be modeled in such a way that the container can automatically resolve everything once they reach a certain level of content or complexity. There may be configuration required to take advantage of advanced features like decorators & composites, or to resolve ambiguities like multiple implementations of interfaces or multiple constructors of implementations. That is why DIE has configuration capabilities, so you should be able to teach the container your intentions.
 
-## Property-focused Configurations
+## Characteristics-focused Configurations
 
-Typically, DI containers take an implementation-oriented approach to configurations. That is, they start with the implementation and then add properties (e.g., scoping, transitivity, and so on). DIE chooses a different path.
+Typically, DI containers take an implementation-oriented approach to configurations. That is, they start with the implementation and then add characteristics (e.g., scoping, transitivity, and so on). DIE chooses a different path.
 
-DIE reverses the traditional configuration principle by focusing on properties. The configuration attributes represent properties and collect the implementations that should apply them. For example, the `ContainerInstanceImplementationAggregation` attribute collects implementations that should be instantiated only once for the entire container and shared everywhere in use.
+DIE reverses the traditional configuration principle by focusing on characteristics. The configuration attributes represent characteristics and collect the implementations that should apply them.
 
 ## Abstraction Configurations
 
-You can also register abstractions (e.g. interfaces). In this case, however, the properties are not applied to the abstractions themselves, but to all registered implementations that implement or inherit from the abstraction. This way you can use marker interfaces and don't have to register each implementation to a property individually. For example, the `ContainerInstanceImplementationAggregation` attribute has an alternative `ContainerInstanceAbstractionAggregation` attribute.
+You can also register abstractions (e.g. interfaces). In this case, however, the characteristics are not applied to the abstractions themselves, but to all registered implementations that implement or inherit from the abstraction. This way you can use marker interfaces and don't have to register each implementation to a characteristics individually. For example, the `ContainerInstanceImplementationAggregation` attribute has an alternative `ContainerInstanceAbstractionAggregation` attribute.
 
-Marker interfaces can only be used by your own code. Therefore, even if you decide to use marker interfaces, using "implementation" attributes to assign properties to external implementations (e.g., .Net types) may still be the only feasible way.
+Marker interfaces can only be used by your own code. Therefore, even if you decide to use marker interfaces, using "implementation" attributes to assign characteristics to external implementations (e.g., .Net types) may still be the only feasible way.
 
 ### Recommended Marker Interfaces And Their Configurations
 
@@ -72,15 +72,15 @@ public interface ISyncTransient { }
 public interface IAsyncTransient { }
 public interface IDecorator<T> { }
 public interface IComposite<T> { }
-public interface ITypeInitializer
+public interface IInitializer
 {
     void Initialize();
 }
-public interface ITaskTypeInitializer
+public interface ITaskInitializer
 {
     Task InitializeAsync();
 }
-public interface IValueTaskTypeInitializer
+public interface IValueTaskInitializer
 {
     ValueTask InitializeAsync();
 }
@@ -99,9 +99,9 @@ The configurations of the marker interfaces:
 [assembly:AsyncTransientAbstractionAggregation(typeof(IAsyncTransient))]
 [assembly:DecoratorAbstractionAggregation(typeof(IDecorator<>))]
 [assembly:CompositeAbstractionAggregation(typeof(IComposite<>))]
-[assembly:TypeInitializer(typeof(ITypeInitializer), nameof(ITypeInitializer.Initialize))]
-[assembly:TypeInitializer(typeof(ITaskTypeInitializer), nameof(ITaskTypeInitializer.InitializeAsync))]
-[assembly:TypeInitializer(typeof(IValueTaskTypeInitializer), nameof(IValueTaskTypeInitializer.InitializeAsync))]
+[assembly:Initializer(typeof(IInitializer), nameof(IInitializer.Initialize))]
+[assembly:Initializer(typeof(ITaskInitializer), nameof(ITaskInitializer.InitializeAsync))]
+[assembly:Initializer(typeof(IValueTaskInitializer), nameof(IValueTaskInitializer.InitializeAsync))]
 ```
 
 The location of the marker interfaces can be in a separate assembly and therefore doesn't need to know anything about DIE. Only the location of the configurations needs to reference the namespace of the marker interface and DIE.
@@ -113,6 +113,8 @@ By using marker interfaces, container configuration becomes much simpler, and fo
 Most of DIE's configuration features fall into one of the following categories: Aggregation, Selection, Filter.
 
 ### Aggregation
+
+The aggregation configurations gather all types of an associated characteristic. For example, the `ContainerInstanceImplementationAggregation` attribute gathers all implementation types which shall be instantiated once and shared throughout the container. 
 
 Aggregation is about collecting knowledge. The container will make decisions based only on the aggregated knowledge. If a container is configured to know of only one implementation of an interface that actually has multiple implementations, the container would still behave as if that interface had only one implementation.
 

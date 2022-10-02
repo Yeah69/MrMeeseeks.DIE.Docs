@@ -8,7 +8,7 @@ Marking a disposable implementation as transient relieves the container of the r
 - Async-transient (discard management for `IAsyncDisposable`)
 - Transient (discard management for both, `IDisposable` & `IAsyncDisposable`)
 
-That is, if an implementation implements both disposal interfaces, then when the container is disposed of...
+That is, if an implementation implements both disposal interfaces, then when the container is disposed of …
 
 - Both disposal methods will be called if it's not marked as transient in any way.
 - Only the sync disposal method will be called if it is marked async-transient.

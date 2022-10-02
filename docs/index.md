@@ -1,6 +1,6 @@
 # Welcome to MrMeeseeks.DIE
 
-The DIE is a secret agency organized by a bunch of Mr. Meeseekses. Its goal is to gather the information necessary to resolve your dependencies. Therefore...
+The DIE is a secret agency organized by a bunch of Mr. Meeseekses. Its goal is to gather the information necessary to resolve your dependencies. Therefore …
 
 > The acronym DIE stands for **D**ependency **I**njection DI**E**.
 

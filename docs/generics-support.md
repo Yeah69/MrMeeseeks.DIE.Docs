@@ -12,7 +12,7 @@ Generic implementations can be configured to do the same things as non-generic i
     typeof(DependencyB<,>))]
 ```
 
-This will configure all variants of the generic implementation `DependencyA<...>` (e.g. `DependencyA<int>` or `DependencyA<string>`) to be a container instance. The same logic applies to `DependencyB<...,...>`, which has two generic parameters.
+This will configure all variants of the generic implementation `DependencyA<…>` (e.g. `DependencyA<int>` or `DependencyA<string>`) to be a container instance. The same logic applies to `DependencyB<…,…>`, which has two generic parameters.
 
 ## Usage
 

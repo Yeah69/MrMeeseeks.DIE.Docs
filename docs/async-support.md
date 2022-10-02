@@ -83,6 +83,6 @@ DIE will always let the container implement `IAsyncDisposable`. So if you want t
 - The async dependencies will be awaited and therefore the sync `CreateFunction` will be discarded during code generation.
 - DIE will never use blocking calls to make asynchronous instances synchronous
 - DIE will never change the synchronization context in the generated code.
-    - Therefore, no use of `Task.Run(...)`.
+    - Therefore, no use of `Task.Run(…)`.
     - Therefore, no use of `await MethodAsync().ConfigureAwait(false)`.
 - DIE will prefer to generate code using `ValueTask` over `Task`.

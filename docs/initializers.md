@@ -15,7 +15,7 @@ DIE guarantees to call the initializer method exactly once.
 
 For the sync initializers, DIE guarantees that the initializer method will be executed to completion before the associated instance is injected into other instances.
 
-The behavior of the async initializer is a bit more complex. If the associated instance is injected via wrapping into a `ValueTask<...>` or a `Task<...>`, then it is injected as soon as the initialization task does the async return (await), and the task wrapper is guaranteed to complete asynchronously exactly when the initializer's task completes. If the associated instance is injected bare (without a task wrapper), then the initializer's task is guaranteed to await and therefore complete before the associated instance is injected further.
+The behavior of the async initializer is a bit more complex. If the associated instance is injected via wrapping into a `ValueTask<…>` or a `Task<…>`, then it is injected as soon as the initialization task does the async return (await), and the task wrapper is guaranteed to complete asynchronously exactly when the initializer's task completes. If the associated instance is injected bare (without a task wrapper), then the initializer's task is guaranteed to await and therefore complete before the associated instance is injected further.
 
 The initializers can be declared either for abstractions or for implementations.
 

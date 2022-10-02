@@ -24,7 +24,7 @@ The attributes come in three flavors, which can be distinguished by the followin
 ```csharp
 [TransientImplementationAggregation(typeof(DisposeMeAsap))]
 ```
-- **FilterTransientAbstractionAggregationAttribute** Each given implementation will be considered again for disposal management.
+- **FilterTransientImplementationAggregationAttribute** Each given implementation will be considered again for disposal management.
 ```csharp
 [FilterTransientImplementationAggregation(typeof(DisposeMeAsapAsync))]
 ```
@@ -40,7 +40,7 @@ The attributes come in three flavors, which can be distinguished by the followin
 ```csharp
 [SyncTransientImplementationAggregation(typeof(DisposeMeAsap))]
 ```
-- **FilterSyncTransientAbstractionAggregationAttribute** Any given implementation will be considered again for sync disposal management.
+- **FilterSyncTransientImplementationAggregationAttribute** Any given implementation will be considered again for sync disposal management.
 ```csharp
 [FilterSyncTransientImplementationAggregation(typeof(DisposeMeAsap))]
 ```
@@ -56,7 +56,7 @@ The attributes come in three flavors, which can be distinguished by the followin
 ```csharp
 [AsyncTransientImplementationAggregation(typeof(DisposeMeAsapAsync))]
 ```
-- **FilterAsyncTransientAbstractionAggregationAttribute** Any given implementation is considered for async disposal management.
+- **FilterAsyncTransientImplementationAggregationAttribute** Any given implementation is considered for async disposal management.
 ```csharp
 [FilterAsyncTransientImplementationAggregation(typeof(DisposeMeAsapAsync))]
 ```

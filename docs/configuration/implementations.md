@@ -46,7 +46,7 @@ Other configuration options include choosing constructors (if an implementation 
 ```csharp
 [PropertyChoice(typeof(Implementation), "Logger", "Settings")]
 ```
-- **FilterConstructorChoiceAttribute** Discards the current property choice for the given implementation type. Just pass the implementation type.
+- **FilterPropertyChoiceAttribute** Discards the current property choice for the given implementation type. Just pass the implementation type.
 ```csharp
 [FilterPropertyChoice(typeof(Implementation))]
 ```

@@ -132,6 +132,8 @@ It's important to note that filters are applied only at the "the beginning" of t
 
 [Disposal](configuration/disposal.md)
 
+[Scoping](configuration/scoping.md)
+
 [Decorator/Composite](configuration/decorator-composite.md)
 
 [Generics](configuration/generics.md)

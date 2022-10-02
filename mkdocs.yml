@@ -14,5 +14,4 @@ nav:
     - Decorators & Composites: decorators-composites.md
     - Initializers: initializers.md
     - Glossary: glossary.md
-    - About: about.md
 theme: readthedocs

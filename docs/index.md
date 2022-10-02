@@ -78,3 +78,19 @@ Or manually insert the package reference into the target `.csproj`:
     - [Decorators & Composites](decorators-composites.md)
     - [Initializers](initializers.md)
 - [Glossary](glossary.md)
+
+## Repositories And Licenses
+
+This project has separate repositories and licenses for the source code of the binaries and for this documentation.
+
+### Source Code
+
+The source code is hosted on github under the [MIT](https://spdx.org/licenses/MIT.html) license:
+
+https://github.com/Yeah69/MrMeeseeks.DIE
+
+### Documenation
+
+The documentation is hosted on github under [The Unlicense](https://spdx.org/licenses/Unlicense.html) license:
+
+https://github.com/Yeah69/MrMeeseeks.DIE.Docs

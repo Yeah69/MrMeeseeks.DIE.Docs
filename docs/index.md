@@ -1,37 +1,37 @@
 # Welcome to MrMeeseeks.DIE
 
-DIE is a secret agency organized by a bunch of Mr. Meeseekses. Its goal is to gather the information necessary to resolve your dependencies. Therefore, …
+The DIE is a secret agency organized by a bunch of Mr. Meeseekses. Its goal is to gather the information necessary to resolve your dependencies. Therefore...
 
-> The acronym DIE stands for **D**ependency **I**njection DI**E**
+> The acronym DIE stands for **D**ependency **I**njection DI**E**.
 
-Let the secret agency DIE compose these info in order to build factory methods which create instances of types of your choice.
+Let the secret agency DIE compile this information to build factory methods that create instances of types of your choice.
 
 ## Introduction
 
-MrMeeseeks.DIE (in this documentation just referred to as DIE) is a compile-time dependency injection container for .Net. As such it generates factory methods which create instances that you need. Instead of relying on reflection the generated code uses the good old `new` operator to create instances like you would probably do yourself if you'd create a pure DI container.
+MrMeeseeks.DIE (just DIE in this documentation) is a compile-time dependency injection container for .Net. As such, it generates factory methods that create the instances you need. Instead of relying on reflection, the generated code uses the good old `new` operator to create instances, just as you'd probably do yourself if you were creating a pure DI container.
 
 ## Nuget
 
-The easiest way of using DIE is by getting it through nuget. Here is the package page:
+The easiest way to use DIE is to get it via nuget. Here is the package page:
 
 https://www.nuget.org/packages/MrMeeseeks.DIE/
 
 Either search for `MrMeeseeks.DIE` in the nuget manager of the IDE of your choice.
 
-Or call following PowerShell-command:
+Or call the following PowerShell command:
 
 ```powershell
 Install-Package MrMeeseeks.DIE
 ```
 
 
-Alternatively you can use `dotnet`:
+Alternatively, you can use `dotnet`:
 
 ```sh
 dotnet add [your project] package MrMeeseeks.DIE
 ```
 
-Or manually insert the package reference into the target `.csproj`:
+Or manually add the package reference to the target `.csproj`:
 
 ```xml
 <PackageReference Include="MrMeeseeks.DIE" Version="[preferrably the current version]" />
@@ -41,26 +41,26 @@ Or manually insert the package reference into the target `.csproj`:
 
 - Compile-Time Code Generation 
     - Incomplete configurations will most likely result in a failed build
-- Unambiguity
-    - Container doesn't resolve ambiguities by assumptions
-    - Configuration features for resolving ambiguities
+- Unambiguousness
+    - Container doesn't resolve ambiguity through assumptions
+    - Configuration features to resolve ambiguities
 - Convenience
-    - Default behaviors intended to decrease required configuration
-    - Optionally marker interfaces can be used for configurations
-    - Bulk configuration (e.g. register all implementations with a single configuration)
+    - Default behaviors designed to reduce the amount of configuration required
+    - Optional marker interfaces can be used for configurations
+    - Mass configuration (e.g., register all implementations with a single configuration)
 - Flexibility
-    - Opt-in configuration style possible
-    - Opt-out configuration style possible
-- Feature-richness
+    - Allows opt-in configuration style
+    - Allows opt-out configuration style
+- Feature richness
     - Scoping
     - Async support
     - Generics support
-    - User-defined elements (Factories, custom parameters, …)
-    - Generated Factories (Func<…>, Lazy<…>)
-    - Decorators & composites
-- Maximum Transparency
+    - User-defined elements (factories, custom parameters, …)
+    - Generated factories (Func<…>, Lazy<…>)
+    - Decorators & Composites
+- Maximum transparency
     - Only your configuration code needs to know about DIE
-    - The rest of your code base can stay oblivious
+    - The rest of your code base can remain oblivious
 
 ## Further Docs
 
@@ -81,7 +81,7 @@ Or manually insert the package reference into the target `.csproj`:
 
 ## Repositories And Licenses
 
-This project has separate repositories and licenses for the source code of the binaries and for this documentation.
+This project has separate repositories and licenses for the source code and for this documentation.
 
 ### Source Code
 

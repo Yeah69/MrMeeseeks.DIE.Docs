@@ -1,10 +1,10 @@
 # User-Defined Elements
 
-User-defined elements are features that allow customization of particular parts of the generated container. User-defined elements always have to be defined within the container-, transient-scope-, or scope-class. They'll apply only to the scope that they are defined in, i.e. they won't be inherited from the container to child scopes. 
+User-defined elements are features that allow customization of certain parts of the generated container. User-defined elements must always be defined within the container, transient scope, or scope class. They only apply to the scope in which they are defined, i.e. they don't inherit from the container to child scopes.
 
 ## Factories
 
-Factories can be used to shortcut the container and supply custom creation logic. You can select from three kinds of factories: methods, properties, or fields. The identifiers of all factories need to start with `DIE_Factory`
+Factories can be used to shortcut the container and provide custom creation logic. You can choose from three types of factories: methods, properties, or fields. The identifiers of all factories must begin with `DIE_Factory`.
 
 ### Requirements
 
@@ -33,13 +33,13 @@ internal sealed partial class Container
 
 ### Remarks
 
-- The parameters of method factories are method injections and are created the same way as regular constructor and property injections, i.e. same configurations apply.
+- The parameters of method factories are method injections and are created in the same way as regular constructor and property injections, i.e. the same configurations apply.
 
-- Be aware that in this case DIE won't automatically manage disposables which created in the process of the factory. However, you can use the `AddForDisposal` user-defined element in order to manually append disposables for disposal managment.
+- Note that in this case, DIE won't automatically manage the disposables created by the factory. However, you can use the `AddForDisposal' custom element to manually add disposables for disposal management.
 
 ## Constructor Parameters
 
-Instead of customizing the creation of a type this'll allow to override specific constructor parameters.
+Instead of customizing the creation of a type with an user-defined factory, this will allow you to override certain constructor parameters.
 
 ### Requirements
 
@@ -66,12 +66,12 @@ internal sealed partial class Container
 
 ### Remarks
 
-- The ordinary parameters are method injections and are created the same way as regular constructor and property injections, i.e. same configurations apply.
+- The ordinary parameters are method injections and are created in the same way as regular constructor and property injections, i.e. the same configurations apply.
 - You can match and override multiple constructor parameters
 
 ## Properties
 
-Instead of customizing the creation of a type this'll allow to override specific properties.
+Instead of customizing the creation of a type with an user-defined factory, this will allow you to override certain properties.
 
 ### Requirements
 
@@ -98,12 +98,12 @@ internal sealed partial class Container
 
 ### Remarks
 
-- The ordinary parameters are method injections and are created the same way as regular constructor and property injections, i.e. same configurations apply.
+- The ordinary parameters are method injections and are created in the same way as regular constructor and property injections, i.e. the same configurations apply.
 - You can match and override multiple properties
 
 ## Initializer Parameters
 
-Instead of customizing the creation of a type this'll allow to override specific initializer parameters.
+Rather than customizing the creation of a type with an user-defined factory, this allows certain initializer parameters to be overridden.
 
 ### Requirements
 
@@ -130,12 +130,12 @@ internal sealed partial class Container
 
 ### Remarks
 
-- The ordinary parameters are method injections and are created the same way as regular constructor and property injections, i.e. same configurations apply.
+- The ordinary parameters are method injections and are created in the same way as regular constructor and property injections, i.e. the same configurations apply.
 - You can match and override multiple initializer parameters
 
 ## Adding For Disposal
 
-You can declare partial methods which can be used in order to add disposables to the disposal managment of the container(/scope).
+You can declare partial methods that can be used to add disposables to the disposal management of the container (or scope).
 
 ### Requirements
 
@@ -170,4 +170,4 @@ internal sealed partial class Container
 
 ### Remarks
 
-- If such a function is declared the container will assume having disposable. Therefore, in that case it'll always generate the disposal code even if the function isn't called once.
+- When such a function is declared, the container assumes that it has disposables. Therefore, it will always generate the disposal code in that case, even if this user-defined function isn't called once.

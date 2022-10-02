@@ -1,29 +1,29 @@
 # Initializers
 
-The instantiation process of .Net is basically just the constructor call and the object initialization (property injection). There are two issues with such a procedure:
+.Net's instantiation process is basically just the constructor call and object initialization (property injection). There are two problems with such a process:
 
-- You can't work in the instantiation process with dependencies injected to properties via the object initializer, because the constructor is called before object initializer.
-- You are forced to have a sync instantiation, because .Net constructors are sync-only.
+- You can't work with dependencies injected to properties via the object initializer in the instantiation process, because the constructor is called before the object initializer.
+- You are forced to do a synchronous instantiation because .Net constructors are synchronous only.
 
-The initializer feature is intended to solve these issues. The feature let's you declare which function of which type should be called as the initialization method. There are some constraints to the initialization methods:
+The initializer feature is intended to solve these issues. It lets you declare which function of which type should be called as the initialization method. There are some restrictions on the initialization methods:
 
-- They can only return either `void`, `ValueTask`, or `Task`.
-- They have to be parameterless and non-static
-- There should be only one declared initialization method per implementation
+- They can only return either `void`, `ValueTask` or `Task`.
+- They must be non-static
+- There should be only one declared initializer method per implementation.
 
 DIE guarantees to call the initializer method exactly once.
 
-With the sync initializers DIE guarantees that the initializer method is run until completion before the asociated instance is further injected into other instances.
+For the sync initializers, DIE guarantees that the initializer method will be executed to completion before the associated instance is injected into other instances.
 
-The async initializer's behavior is a bit more complex. If the asociate instance is injected via wrapping into a `ValueTask<…>` or a `Task<…>`, then it gets injected injected as soon as the initialization task does the async return (await) and the task wrapper is guaranteed to complete asynchronously exactly when the initializer's task completes. If the asociated instance is injected bare (without task wrapper) then the initializer's task is guaranteed to be awaited and therefore run to completion before the asociated instance is further injected.
+The behavior of the async initializer is a bit more complex. If the associated instance is injected via wrapping into a `ValueTask<...>` or a `Task<...>`, then it is injected as soon as the initialization task does the async return (await), and the task wrapper is guaranteed to complete asynchronously exactly when the initializer's task completes. If the associated instance is injected bare (without a task wrapper), then the initializer's task is guaranteed to await and therefore complete before the associated instance is injected further.
 
-The initalizers can be declared either for abstractions or for implementations. 
+The initializers can be declared either for abstractions or for implementations.
 
 ## Explicit Implementation Trick
 
-This is just a recommendation, because it probably is a matter of taste.
+This is only a recommendation, as it is probably a matter of taste.
 
-If you use an interface a for the initializers, then make it an explicit implemetation in the implementation types. The benefit of this approach is, that in this case you can't reach the initializer method without explicitly casting to the interace type. Because the initializer method should be called only once and only by the container, you don't need to access the initializer method regularly anyway.
+If you are using an interface for the initializers, then make it an explicit implementation in the implementation types. The advantage of this approach is that in this case you can't reach the initializer method without explicitly casting to the interface type. Since the initializer method should only be called once, and only by the container, you don't need to call it regularly anyway.
 
 ```csharp
 internal class Dependency : ITypeInitializer

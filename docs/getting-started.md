@@ -1,10 +1,10 @@
 # Getting Started
 
-This tutorial-like section is intended for beginners and users who are completely new to DIE. It's just intended to get you started.
+This tutorial-like section is intended for beginners and users who are completely new to DIE. It's just meant to get you started.
 
 ## Our First Container
 
-First we need an implementation which can later be created by the container. We'll start with:
+First, we need an implementation that can later be built by the container. We'll start with:
 
 ```csharp
 namespace GettingStarted;
@@ -15,7 +15,7 @@ internal class Logger
 }
 ```
 
-That's sufficient for a first small container configuration:
+That's enough for a first small container configuration:
 
 ```csharp
 using MrMeeseeks.DIE.Configuration.Attributes;
@@ -31,7 +31,7 @@ internal sealed partial class Container
 }
 ```
 
-Here we have our container. The `ImplementationAggregation`-attribute registers our `Logger` class as an implementation which should be considered by the container. The `CreateFunction`-attribute instructs the container to generate a `Logger Create()`-function (i.e. a factory method which returns an instance of type `Logger`).
+Here we have our container. The `ImplementationAggregation` attribute registers our `Logger` class as an implementation to be considered by the container. The `CreateFunction` attribute instructs the container to create a `Logger Create()` function (i.e. a factory method that returns an instance of type Logger).
 
 We are ready to use it:
 
@@ -41,13 +41,13 @@ var logger = container.Create();
 logger.Log("Hello, World!");
 ```
 
-This is it! Much likely the simple most example which can be thought up, but it's a start. ;)
+This is it! Probably the simplest example you can think of, but it's a start ;)
 
-The `using` will dispose the container asynchronously at the end. In this example it isn't necessary, because we have no disposables in use yet. However, this will make use prepared for future changes. But keep in mind that it isn't force upon you. If you don't need it you can remove it at your own risk of missing to dispose resources.
+The `using` will asynchronously dispose of the container at the end. In this example it's not necessary because we don't have any disposables in use yet. However, this will prepare the use for future changes. But keep in mind that it's not forced upon you. If you don't need it you can remove it at your own risk of missing to dispose resources.
 
 ## Making It Dependency Injection Idiomatic
 
-Let's spice things up a bit. In dependency injection it's in most cases better style to depend upon interfaces (abstractions) instead of concrete classes (implementations). What do we need to change for that? Let's start again with the `Logger` class:
+Let's spice things up a bit. With dependency injection, in most cases it's better style to depend on interfaces (abstractions) rather than concrete classes (implementations). So what do we need to change? Let's start with the `Logger` class again:
 
 ```csharp
 namespace GettingStarted;
@@ -63,7 +63,7 @@ internal class Logger : ILogger
 }
 ```
 
-And now a class which depends upon it:
+And now a class that depends on it:
 
 ```csharp
 namespace GettingStarted;
@@ -103,7 +103,7 @@ internal sealed partial class Container
 }
 ```
 
-… and the usage:
+… and using it:
 
 ```csharp
 using var container = new GettingStarted.Container();
@@ -113,7 +113,7 @@ mrMeeseeks.Greet();
 
 Now we are using abstractions and have a true dependency (i.e. `MrMeeseeks` depends on an instance of type `ILogger`).
 
-Please note that mapping interaces to a specific implementation is only required if the interface has multiple configured implementations. If the interfaces has a single configured implementation, then DIE will automatically chose it. With multiple implementations a manually configured implementation choice is necessary, but that is a more advanced topic.
+Note that mapping interfaces to a specific implementation is only necessary if the interface has multiple configured implementations. If the interface has a single configured implementation, DIE will automatically choose it. With multiple implementations, a manual choice of the configured implementation is required, but that is a more advanced topic.
 
 ## Generated Code
 
@@ -186,13 +186,13 @@ namespace GettingStarted
 #nullable disable
 ```
 
-If you want to have a look at the generated code yourself, you should add following to the `.csproj` which contains the container:
+If you want to look at the generated code yourself, you should add the following to the `.csproj` that contains the container:
 
 ```xml
 <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
 <CompilerGeneratedFilesOutputPath>$(BaseIntermediateOutputPath)\GeneratedFiles</CompilerGeneratedFilesOutputPath>
 ```
 
-Then a copy of the generated code will be put into `obj\GeneratedFiles\…`. Strongly recommended to have a look into the generated code, if you are interested in learning how DIE works. 
+Then a copy of the generated code is placed in `obj\GeneratedFiles\…`. It is highly recommended to take a look at the generated code if you are interested in learning how DIE works. 
 
-The generated code for this example doesn't look like much for this small example. However, first of all you need to consider that all of this is boilerplate code, which becomes tedious to write quickly. Instead with DIE only little configuration is required to be written. And second, as your projects grow it'll become more and more of a burden to keep a pure DI container maintained yourself. While a DIE-container can be configured to almost seamlessly adjust to your continues changes with the help of convenience functions. 
+The generated code doesn't look like much for this small example. However, you have to keep in mind that this is boilerplate code, which can be tedious to write quickly. Instead, with DIE, there is very little configuration that needs to be written. And second, as your projects grow, it's going to become increasingly burdensome to maintain a pure DIE container yourself. A DIE container, on the other hand, can be configured to adapt almost seamlessly to your ongoing changes using convenience features.

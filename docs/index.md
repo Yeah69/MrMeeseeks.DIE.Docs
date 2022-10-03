@@ -14,7 +14,7 @@ MrMeeseeks.DIE (just DIE in this documentation) is a compile-time dependency inj
 
 The easiest way to use DIE is to get it via nuget. Here is the package page:
 
-https://www.nuget.org/packages/MrMeeseeks.DIE/
+[https://www.nuget.org/packages/MrMeeseeks.DIE/](https://www.nuget.org/packages/MrMeeseeks.DIE/)
 
 Either search for `MrMeeseeks.DIE` in the nuget manager of the IDE of your choice.
 
@@ -87,10 +87,10 @@ This project has separate repositories and licenses for the source code and for 
 
 The source code is hosted on github under the [MIT](https://spdx.org/licenses/MIT.html) license:
 
-https://github.com/Yeah69/MrMeeseeks.DIE
+[https://github.com/Yeah69/MrMeeseeks.DIE](https://github.com/Yeah69/MrMeeseeks.DIE)
 
 ### Documenation
 
 The documentation is hosted on github under [The Unlicense](https://spdx.org/licenses/Unlicense.html) license:
 
-https://github.com/Yeah69/MrMeeseeks.DIE.Docs
+[https://github.com/Yeah69/MrMeeseeks.DIE.Docs](https://github.com/Yeah69/MrMeeseeks.DIE.Docs)

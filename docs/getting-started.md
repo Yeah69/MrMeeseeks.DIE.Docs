@@ -36,14 +36,14 @@ Here we have our container. The `ImplementationAggregation` attribute registers 
 We are ready to use it:
 
 ```csharp
-using var container = new GettingStarted.Container();
+await using var container = new GettingStarted.Container();
 var logger = container.Create();
 logger.Log("Hello, World!");
 ```
 
 This is it! Probably the simplest example you can think of, but it's a start ;)
 
-The `using` will asynchronously dispose of the container at the end. In this example it's not necessary because we don't have any disposables in use yet. However, this will prepare the use for future changes. But keep in mind that it's not forced upon you. If you don't need it you can remove it at your own risk of missing to dispose resources.
+The `await using` will asynchronously dispose of the container at the end. In this example it's not necessary because we don't have any disposables in use yet. However, this will prepare the use for future changes. But keep in mind that it's not forced upon you. If you don't need it you can remove it at your own risk of missing to dispose resources.
 
 ## Making It Dependency Injection Idiomatic
 

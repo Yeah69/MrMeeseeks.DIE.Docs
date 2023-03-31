@@ -58,6 +58,7 @@ Or manually add the package reference to the target `.csproj`:
     - User-defined elements (factories, custom parameters, …)
     - Generated factories (Func<…>, Lazy<…>)
     - Decorators & Composites
+    - Collection injections (IEnumerable<…>, IAsyncEnumerable<…>, IList<…> and many more)
 - Maximum transparency
     - Only your configuration code needs to know about DIE
     - The rest of your code base can remain oblivious
@@ -71,12 +72,14 @@ Or manually add the package reference to the target `.csproj`:
     - [Scoping](scoping.md)
     - [User-defined Elements](user-defined-elements.md)
     - [Disposal](disposal.md)
+    - [Resolution Precedence](resolution-precedence.md)
 - Usage
     - [Injections](injections.md)
     - [Async Support](async-support.md)
     - [Generics support](generics-support.md)
     - [Decorators & Composites](decorators-composites.md)
     - [Initializers](initializers.md)
+    - [Samples](samples.md)
 - [Glossary](glossary.md)
 
 ## Repositories And Licenses
@@ -94,3 +97,7 @@ The source code is hosted on github under the [MIT](https://spdx.org/licenses/MI
 The documentation is hosted on github under [The Unlicense](https://spdx.org/licenses/Unlicense.html) license:
 
 [https://github.com/Yeah69/MrMeeseeks.DIE.Docs](https://github.com/Yeah69/MrMeeseeks.DIE.Docs)
+
+## Acknowledgements
+
+See [page](acknowledgements.md).

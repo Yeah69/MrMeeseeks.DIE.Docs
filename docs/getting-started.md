@@ -27,16 +27,18 @@ namespace GettingStarted;
 [CreateFunction(typeof(Logger), "Create")]
 internal sealed partial class Container
 {
-    
+    private Container() { }
 }
 ```
 
 Here we have our container. The `ImplementationAggregation` attribute registers our `Logger` class as an implementation to be considered by the container. The `CreateFunction` attribute instructs the container to create a `Logger Create()` function (i.e. a factory method that returns an instance of type Logger).
 
+With DIE a container needs to have at least one explicit constructor and all constructors should be private. These are necessary constraints of DIE in order to guarantee intitialization features (which we won't use in this example, however).
+
 We are ready to use it:
 
 ```csharp
-await using var container = new GettingStarted.Container();
+await using var container = GettingStarted.Container.DIE_CreateContainer();
 var logger = container.Create();
 logger.Log("Hello, World!");
 ```
@@ -44,6 +46,8 @@ logger.Log("Hello, World!");
 This is it! Probably the simplest example you can think of, but it's a start ;)
 
 The `await using` will asynchronously dispose of the container at the end. In this example it's not necessary because we don't have any disposables in use yet. However, this will prepare the use for future changes. But keep in mind that it's not forced upon you. If you don't need it you can remove it at your own risk of missing to dispose resources.
+
+Please note that we don't use the container class constructor directly, but the a generated static function that creates a container instance via that constructor. If we would use the before mentioned initialization features, then they would be placed at this static function and therefore guaranteed to be processed as well.
 
 ## Making It Dependency Injection Idiomatic
 
@@ -121,65 +125,165 @@ Let's have a look at the generated code:
 
 ```csharp
 #nullable enable
-namespace GettingStarted
+namespace MrMeeseeks.DIE.Samples.GettingStarted
 {
-    partial class Container : global::System.IAsyncDisposable, global::System.IDisposable
+    sealed partial class Container : global::MrMeeseeks.DIE.Samples.GettingStarted.Container.ITransientScope_0_11, global::System.IAsyncDisposable, global::System.IDisposable
     {
-        private global::GettingStarted.MrMeeseeks CreateMrMeeseeks_2_0()
+        public static global::MrMeeseeks.DIE.Samples.GettingStarted.Container DIE_CreateContainer()
         {
-            if (this.Disposed_1_7)
-                throw new System.ObjectDisposedException("Container", $"[DIE] This scope \"Container\" is already disposed, so it can't create a \"global::GettingStarted.MrMeeseeks\" instance anymore.");
-            global::GettingStarted.Logger logger_2_2 = new global::GettingStarted.Logger();
-            global::GettingStarted.ILogger iLogger_2_3 = (global::GettingStarted.ILogger)logger_2_2;
-            global::GettingStarted.MrMeeseeks mrMeeseeks_2_1 = new global::GettingStarted.MrMeeseeks(logger: iLogger_2_3);
-            if (this.Disposed_1_7)
-                throw new System.ObjectDisposedException("Container", $"[DIE] This scope \"Container\" is already disposed, so it can't create a \"global::GettingStarted.MrMeeseeks\" instance anymore.");
-            return mrMeeseeks_2_1;
+            global::MrMeeseeks.DIE.Samples.GettingStarted.Container container_0_10 = new global::MrMeeseeks.DIE.Samples.GettingStarted.Container();
+            return container_0_10;
         }
 
-        public global::GettingStarted.MrMeeseeks Create()
+        internal global::MrMeeseeks.DIE.Samples.GettingStarted.MrMeeseeks Create()
         {
-            if (this.Disposed_1_7)
-                throw new System.ObjectDisposedException("Container", $"[DIE] This scope \"Container\" is already disposed, so it can't create a \"global::GettingStarted.MrMeeseeks\" instance anymore.");
-            global::GettingStarted.MrMeeseeks ret_2_4 = (global::GettingStarted.MrMeeseeks)this.CreateMrMeeseeks_2_0();
-            if (this.Disposed_1_7)
-                throw new System.ObjectDisposedException("Container", $"[DIE] This scope \"Container\" is already disposed, so it can't create a \"global::GettingStarted.MrMeeseeks\" instance anymore.");
-            return ret_2_4;
+            if (Disposed_0_2)
+                throw new System.ObjectDisposedException("global::MrMeeseeks.DIE.Samples.GettingStarted.Container", $"[DIE] This scope \"global::MrMeeseeks.DIE.Samples.GettingStarted.Container\" is already disposed, so it can't create a \"global::MrMeeseeks.DIE.Samples.GettingStarted.MrMeeseeks\" instance anymore.");
+            global::MrMeeseeks.DIE.Samples.GettingStarted.MrMeeseeks functionCallResult_2_1 = (global::MrMeeseeks.DIE.Samples.GettingStarted.MrMeeseeks)CreateMrMeeseeks_2_0();
+            if (Disposed_0_2)
+                throw new System.ObjectDisposedException("global::MrMeeseeks.DIE.Samples.GettingStarted.Container", $"[DIE] This scope \"global::MrMeeseeks.DIE.Samples.GettingStarted.Container\" is already disposed, so it can't create a \"global::MrMeeseeks.DIE.Samples.GettingStarted.MrMeeseeks\" instance anymore.");
+            return functionCallResult_2_1;
         }
 
-        public global::System.Threading.Tasks.Task<global::GettingStarted.MrMeeseeks> CreateAsync()
+        private global::MrMeeseeks.DIE.Samples.GettingStarted.MrMeeseeks CreateMrMeeseeks_2_0()
         {
-            if (this.Disposed_1_7)
-                throw new System.ObjectDisposedException("Container", $"[DIE] This scope \"Container\" is already disposed, so it can't create a \"global::System.Threading.Tasks.Task<global::GettingStarted.MrMeeseeks>\" instance anymore.");
-            global::GettingStarted.MrMeeseeks ret_2_5 = (global::GettingStarted.MrMeeseeks)this.CreateMrMeeseeks_2_0();
-            global::System.Threading.Tasks.Task<global::GettingStarted.MrMeeseeks> task_1_1 = global::System.Threading.Tasks.Task.FromResult(ret_2_5);
-            if (this.Disposed_1_7)
-                throw new System.ObjectDisposedException("Container", $"[DIE] This scope \"Container\" is already disposed, so it can't create a \"global::System.Threading.Tasks.Task<global::GettingStarted.MrMeeseeks>\" instance anymore.");
-            return task_1_1;
+            global::MrMeeseeks.DIE.Samples.GettingStarted.Logger logger_2_4 = new global::MrMeeseeks.DIE.Samples.GettingStarted.Logger();
+            global::MrMeeseeks.DIE.Samples.GettingStarted.ILogger iLogger_2_3 = (global::MrMeeseeks.DIE.Samples.GettingStarted.ILogger)logger_2_4;
+            global::MrMeeseeks.DIE.Samples.GettingStarted.MrMeeseeks mrMeeseeks_2_2 = new global::MrMeeseeks.DIE.Samples.GettingStarted.MrMeeseeks(logger: iLogger_2_3);
+            return mrMeeseeks_2_2;
         }
 
-        public global::System.Threading.Tasks.ValueTask<global::GettingStarted.MrMeeseeks> CreateValueAsync()
+        private global::System.Collections.Concurrent.ConcurrentBag<global::System.IAsyncDisposable> concurrentBag_0_7 = new global::System.Collections.Concurrent.ConcurrentBag<global::System.IAsyncDisposable>();
+        private global::System.Collections.Concurrent.ConcurrentBag<global::System.IDisposable> concurrentBag_0_6 = new global::System.Collections.Concurrent.ConcurrentBag<global::System.IDisposable>();
+        private int _disposed_0_0 = 0;
+        private bool Disposed_0_2 => _disposed_0_0 != 0;
+        public async global::System.Threading.Tasks.ValueTask DisposeAsync()
         {
-            if (this.Disposed_1_7)
-                throw new System.ObjectDisposedException("Container", $"[DIE] This scope \"Container\" is already disposed, so it can't create a \"global::System.Threading.Tasks.ValueTask<global::GettingStarted.MrMeeseeks>\" instance anymore.");
-            global::GettingStarted.MrMeeseeks ret_2_6 = (global::GettingStarted.MrMeeseeks)this.CreateMrMeeseeks_2_0();
-            global::System.Threading.Tasks.ValueTask<global::GettingStarted.MrMeeseeks> task_1_2 = global::System.Threading.Tasks.ValueTask.FromResult(ret_2_6);
-            if (this.Disposed_1_7)
-                throw new System.ObjectDisposedException("Container", $"[DIE] This scope \"Container\" is already disposed, so it can't create a \"global::System.Threading.Tasks.ValueTask<global::GettingStarted.MrMeeseeks>\" instance anymore.");
-            return task_1_2;
+            var disposed_0_1 = global::System.Threading.Interlocked.Exchange(ref _disposed_0_0, 1);
+            if (disposed_0_1 != 0)
+                return;
+            global::System.Collections.Generic.List<global::System.Exception> aggregateException_0_4 = new global::System.Collections.Generic.List<global::System.Exception>();
+            try
+            {
+                while (transientScopeDisposal_0_8.Count > 0)
+                {
+                    var transientScopeToDispose_0_9 = System.Linq.Enumerable.FirstOrDefault(transientScopeDisposal_0_8.Keys);
+                    if (transientScopeToDispose_0_9 is not null && transientScopeDisposal_0_8.TryRemove(transientScopeToDispose_0_9, out _))
+                    {
+                        try
+                        {
+                            (transientScopeToDispose_0_9 as global::System.IDisposable)?.Dispose();
+                        }
+                        catch (global::System.Exception exceptionToAggregate_0_5)
+                        {
+                            // catch and aggregate so other disposals are triggered
+                            aggregateException_0_4.Add(exceptionToAggregate_0_5);
+                        }
+                    }
+                }
+
+                transientScopeDisposal_0_8.Clear();
+                while (concurrentBag_0_7.Count > 0 && concurrentBag_0_7.TryTake(out var iDisposable_0_3))
+                {
+                    try
+                    {
+                        await iDisposable_0_3.DisposeAsync();
+                    }
+                    catch (global::System.Exception exceptionToAggregate_0_5)
+                    {
+                        // catch and aggregate so other disposals are triggered
+                        aggregateException_0_4.Add(exceptionToAggregate_0_5);
+                    }
+                }
+
+                while (concurrentBag_0_6.Count > 0 && concurrentBag_0_6.TryTake(out var iDisposable_0_3))
+                {
+                    try
+                    {
+                        iDisposable_0_3.Dispose();
+                    }
+                    catch (global::System.Exception exceptionToAggregate_0_5)
+                    {
+                        // catch and aggregate so other disposals are triggered
+                        aggregateException_0_4.Add(exceptionToAggregate_0_5);
+                    }
+                }
+            }
+            finally
+            {
+            }
+
+            if (aggregateException_0_4.Count == 1)
+                throw aggregateException_0_4[0];
+            else if (aggregateException_0_4.Count > 1)
+                throw new System.AggregateException(aggregateException_0_4);
         }
 
-        private int _disposed_1_5 = 0;
-        private bool Disposed_1_7 => _disposed_1_5 != 0;
         public void Dispose()
         {
-            var disposed_1_6 = global::System.Threading.Interlocked.Exchange(ref this._disposed_1_5, 1);
+            var disposed_0_1 = global::System.Threading.Interlocked.Exchange(ref _disposed_0_0, 1);
+            if (disposed_0_1 != 0)
+                return;
+            global::System.Collections.Generic.List<global::System.Exception> aggregateException_0_4 = new global::System.Collections.Generic.List<global::System.Exception>();
+            try
+            {
+                while (transientScopeDisposal_0_8.Count > 0)
+                {
+                    var transientScopeToDispose_0_9 = System.Linq.Enumerable.FirstOrDefault(transientScopeDisposal_0_8.Keys);
+                    if (transientScopeToDispose_0_9 is not null && transientScopeDisposal_0_8.TryRemove(transientScopeToDispose_0_9, out _))
+                    {
+                        try
+                        {
+                            (transientScopeToDispose_0_9 as global::System.IDisposable)?.Dispose();
+                        }
+                        catch (global::System.Exception exceptionToAggregate_0_5)
+                        {
+                            // catch and aggregate so other disposals are triggered
+                            aggregateException_0_4.Add(exceptionToAggregate_0_5);
+                        }
+                    }
+                }
+
+                transientScopeDisposal_0_8.Clear();
+                while (concurrentBag_0_7.Count > 0 && concurrentBag_0_7.TryTake(out var iDisposable_0_3))
+                {
+                    try
+                    {
+                        (iDisposable_0_3 as global::System.IDisposable)?.Dispose();
+                    }
+                    catch (global::System.Exception exceptionToAggregate_0_5)
+                    {
+                        // catch and aggregate so other disposals are triggered
+                        aggregateException_0_4.Add(exceptionToAggregate_0_5);
+                    }
+                }
+
+                while (concurrentBag_0_6.Count > 0 && concurrentBag_0_6.TryTake(out var iDisposable_0_3))
+                {
+                    try
+                    {
+                        iDisposable_0_3.Dispose();
+                    }
+                    catch (global::System.Exception exceptionToAggregate_0_5)
+                    {
+                        // catch and aggregate so other disposals are triggered
+                        aggregateException_0_4.Add(exceptionToAggregate_0_5);
+                    }
+                }
+            }
+            finally
+            {
+            }
+
+            if (aggregateException_0_4.Count == 1)
+                throw aggregateException_0_4[0];
+            else if (aggregateException_0_4.Count > 1)
+                throw new System.AggregateException(aggregateException_0_4);
         }
 
-        public global::System.Threading.Tasks.ValueTask DisposeAsync()
+        private global::System.Collections.Concurrent.ConcurrentDictionary<global::System.IDisposable, global::System.IDisposable> transientScopeDisposal_0_8 = new global::System.Collections.Concurrent.ConcurrentDictionary<global::System.IDisposable, global::System.IDisposable>();
+        private interface ITransientScope_0_11
         {
-            Dispose();
-            return new global::System.Threading.Tasks.ValueTask(global::System.Threading.Tasks.Task.CompletedTask);
         }
     }
 }

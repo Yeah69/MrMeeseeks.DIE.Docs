@@ -121,14 +121,36 @@ Collection injections aren't limited to injecting a single implementation. There
 
 The currently supported collection types are 
 
-- IEnumerable<…>
-- IReadOnlyList<…>
-- IReadOnlyCollection<…>
+- `IEnumerable<…>`
+- `IAsyncEnumerable<…>`
 - Arrays
+- `IList<…>`
+- `ICollection<…>`
+- `ReadOnlyCollection<…>`
+- `IReadOnlyCollection<…>`
+- `IReadOnlyList<…>`
+- `ArraySegment<…>`
+- `ConcurrentBag<…>`
+- `ConcurrentQueue<…>`
+- `ConcurrentStack<…>`
+- `HashSet<…>`
+- `LinkedList<…>`
+- `List<…>`
+- `Queue<…>`
+- `SortedSet<…>`
+- `Stack<…>`
+- `ImmutableArray<…>`
+- `ImmutableHashSet<…>`
+- `ImmutableList<…>`
+- `ImmutableQueue<…>`
+- `ImmutableSortedSet<…>`
+- `ImmutableStack<…>`
 
 If you want to restrict the implementations of collection injection that are used, you can use an implementation collection choice as a configuration option.
 
-You can also combine the collection type with `ValueTask<…>` or `Task<…>` (e.g. `IReadOnlyList<ValueTask<IDependency>>`), if you might need to wrap asynchronous resolutions of one or multiple implementations.
+`IEnumerable<…>` and `IAsyncEnumerable<…>` injections are lazy evaluated. That means, the item instances are created one at a time as they get pulled out by iteration. However, there is one exception to the lazy evaluation. That is with an `IEnumerable<…>` injection which is asynchronous, meaning that it needs to perform one or more awaits. In that case the items will be gathered in an array and returned as `IEnumerable<…>`.
+
+You can also combine the collection types with `ValueTask<…>` or `Task<…>` (e.g. `ValueTask<IReadOnlyList<IDependency>>`), if you might need to wrap asynchronous resolutions of one or multiple implementations.
 
 ## Factory Injection
 

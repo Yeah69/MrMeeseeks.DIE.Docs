@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="http://die.mrmeeseeks.net/configuration/scoping/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Scoping Configurations - MrMeeseeks.DIE</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Scoping Configurations";
+        var mkdocs_page_input_path = "configuration/scoping.md";
+        var mkdocs_page_url = "/configuration/scoping/";
+      </script>
+    
+    <script src="../../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> MrMeeseeks.DIE
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../getting-started/">Getting Started</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../">Configuration</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../naming-rules/">Naming Rules</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../scoping/">Scoping</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../user-defined-elements/">User-defined Elements</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../disposal/">Disposal</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../injections/">Injections</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../async-support/">Async Support</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../generics-support/">Generics Support</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../decorators-composites/">Decorators & Composites</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../initializers/">Initializers</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../glossary/">Glossary</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">MrMeeseeks.DIE</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>Scoping Configurations</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="scoping-configurations">Scoping Configurations</h1>
+<h2 id="purpose">Purpose</h2>
+<p>There are two purposes for scoping configurations:</p>
+<ul>
+<li><strong>Scoped Instances</strong> Scoped instances aren't instantiated per dependency injection, but at most once for a given scope. DIE cannot simply assume which of the implementations should be treated as scoped instances and for which type of scope (the container, the transient scope, or the scope). So if you want to share instances of certain implementations, you must tell DIE which implementation in which scope.</li>
+<li><strong>Scope Roots</strong> are implementations that mark the beginning of a scope. When DIE needs to instantiate a scope root, it creates a new scope and resolves the scope root as it's root instance. That is, the scope root is the first instance of its scope. DIE doesn't expect any implementations to be scope roots, so it needs to be configured.</li>
+</ul>
+<h2 id="attributes">Attributes</h2>
+<ul>
+<li><strong>ContainerInstanceAbstractionAggregationAttribute</strong> For each given abstraction, all of its implementations are marked as scoped instances for the container.</li>
+</ul>
+<pre><code class="language-csharp">[ContainerInstanceAbstractionAggregation(typeof(IAllTheSingles))]
+</code></pre>
+<ul>
+<li><strong>FilterContainerInstanceAbstractionAggregationAttribute</strong> For each given abstraction, all of its implementations are discarded as scoped instances for the container.</li>
+</ul>
+<pre><code class="language-csharp">[FilterContainerInstanceAbstractionAggregation(typeof(INotSingleAnymore))]
+</code></pre>
+<ul>
+<li><strong>ContainerInstanceImplementationAggregationAttribute</strong> Given implementations are marked as scoped instances for the container.</li>
+</ul>
+<pre><code class="language-csharp">[ContainerInstanceImplementationAggregation(typeof(Single))]
+</code></pre>
+<ul>
+<li><strong>FilterContainerInstanceImplementationAggregationAttribute</strong> Given implementations are discarded as scoped instances for the container.</li>
+</ul>
+<pre><code class="language-csharp">[FilterContainerInstanceImplementationAggregation(typeof(NotSingleAnymore))]
+</code></pre>
+<ul>
+<li><strong>TransientScopeInstanceAbstractionAggregationAttribute</strong> For each given abstraction, all of its implementations are marked as scoped instances for transient scopes.</li>
+</ul>
+<pre><code class="language-csharp">[TransientScopeInstanceAbstractionAggregation(typeof(IAllTheSingles))]
+</code></pre>
+<ul>
+<li><strong>FilterTransientScopeInstanceAbstractionAggregationAttribute</strong> For any given abstraction, all of its implementations are discarded as scoped instances for transient scopes.</li>
+</ul>
+<pre><code class="language-csharp">[FilterTransientScopeInstanceAbstractionAggregation(typeof(INotSingleAnymore))]
+</code></pre>
+<ul>
+<li><strong>TransientScopeInstanceImplementationAggregationAttribute</strong> Given implementations are marked as scoped instances for transient scopes.</li>
+</ul>
+<pre><code class="language-csharp">[TransientScopeInstanceImplementationAggregation(typeof(Single))]
+</code></pre>
+<ul>
+<li><strong>FilterTransientScopeInstanceImplementationAggregationAttribute</strong> Given implementations are discarded as scoped instances for transient scopes.</li>
+</ul>
+<pre><code class="language-csharp">[FilterTransientScopeInstanceImplementationAggregation(typeof(NotSingleAnymore))]
+</code></pre>
+<ul>
+<li><strong>ScopeInstanceAbstractionAggregationAttribute</strong> For each given abstraction, all of its implementations are marked as scoped instances for scopes.</li>
+</ul>
+<pre><code class="language-csharp">[ScopeInstanceAbstractionAggregation(typeof(IAllTheSingles))]
+</code></pre>
+<ul>
+<li><strong>FilterScopeInstanceAbstractionAggregationAttribute</strong> Of any given abstraction, all of its implementations are discarded as scoped instances for scopes.</li>
+</ul>
+<pre><code class="language-csharp">[FilterScopeInstanceAbstractionAggregation(typeof(INotSingleAnymore))]
+</code></pre>
+<ul>
+<li><strong>ScopeInstanceImplementationAggregationAttribute</strong> Given implementations are marked as scoped instances for scopes.</li>
+</ul>
+<pre><code class="language-csharp">[ScopeInstanceImplementationAggregation(typeof(Single))]
+</code></pre>
+<ul>
+<li><strong>FilterScopeInstanceImplementationAggregationAttribute</strong> Given implementations are discarded as scoped instances for scopes.</li>
+</ul>
+<pre><code class="language-csharp">[FilterScopeInstanceImplementationAggregation(typeof(NotSingleAnymore))]
+</code></pre>
+<ul>
+<li><strong>TransientScopeRootAbstractionAggregationAttribute</strong> For each given abstraction, all of its implementations are marked as scope roots for transient scopes.</li>
+</ul>
+<pre><code class="language-csharp">[TransientScopeRootAbstractionAggregation(typeof(IBeginningOfSomething))]
+</code></pre>
+<ul>
+<li><strong>FilterTransientScopeRootAbstractionAggregationAttribute</strong> For any given abstraction, all of its implementations are discarded as scope roots for transient scopes.</li>
+</ul>
+<pre><code class="language-csharp">[FilterTransientScopeRootAbstractionAggregation(typeof(IOrdinaryDependency))]
+</code></pre>
+<ul>
+<li><strong>TransientScopeRootImplementationAggregationAttribute</strong> Given implementations are marked as scope roots for transient scopes.</li>
+</ul>
+<pre><code class="language-csharp">[TransientScopeRootImplementationAggregation(typeof(Ceo))]
+</code></pre>
+<ul>
+<li><strong>FilterTransientScopeRootImplementationAggregationAttribute</strong> Given implementations are discarded as scope roots for transient scopes.</li>
+</ul>
+<pre><code class="language-csharp">[FilterTransientScopeRootImplementationAggregation(typeof(Trainee))]
+</code></pre>
+<ul>
+<li><strong>ScopeRootAbstractionAggregationAttribute</strong> For each given abstraction, all of its implementations are marked as scope roots for scopes.</li>
+</ul>
+<pre><code class="language-csharp">[ScopeRootAbstractionAggregation(typeof(IBeginningOfSomething))]
+</code></pre>
+<ul>
+<li><strong>FilterScopeRootAbstractionAggregationAttribute</strong> For any given abstraction, all of its implementations are discarded as scope roots for scopes.</li>
+</ul>
+<pre><code class="language-csharp">[FilterScopeRootAbstractionAggregation(typeof(IOrdinaryDependency))]
+</code></pre>
+<ul>
+<li><strong>ScopeRootImplementationAggregationAttribute</strong> Given implementations are marked as scope roots for scopes.</li>
+</ul>
+<pre><code class="language-csharp">[ScopeRootImplementationAggregation(typeof(Ceo))]
+</code></pre>
+<ul>
+<li><strong>FilterScopeRootImplementationAggregationAttribute</strong> Given implementations are discarded as scope roots for scopes.</li>
+</ul>
+<pre><code class="language-csharp">[FilterScopeRootImplementationAggregation(typeof(Trainee))]
+</code></pre>
+<h2 id="recommendations">Recommendations</h2>
+<ul>
+<li>Use transient scoped instances as needed. This is because the complexity of transient scoped instances is greater than that of container instances and scoped instances. Therefore, if an instance can be used throughout the container, you should consider marking it as a container instance. And if an instance can be limited to being shared in a scope, then consider marking it as a scope instance.</li>
+</ul>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

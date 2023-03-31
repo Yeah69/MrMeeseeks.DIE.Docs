@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="http://die.mrmeeseeks.net/disposal/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Disposal - MrMeeseeks.DIE</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Disposal";
+        var mkdocs_page_input_path = "disposal.md";
+        var mkdocs_page_url = "/disposal/";
+      </script>
+    
+    <script src="../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> MrMeeseeks.DIE
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../getting-started/">Getting Started</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../configuration/">Configuration</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../naming-rules/">Naming Rules</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../scoping/">Scoping</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../user-defined-elements/">User-defined Elements</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">Disposal</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#scopes-disposal-behavior">Scope's Disposal Behavior</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../injections/">Injections</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../async-support/">Async Support</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../generics-support/">Generics Support</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../decorators-composites/">Decorators & Composites</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../initializers/">Initializers</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../glossary/">Glossary</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">MrMeeseeks.DIE</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>Disposal</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="disposal">Disposal</h1>
+<p>Disposal is an integral part of containers in DIE. By default, disposables (either <code>IDisposable</code> or <code>IAsyncDisposable</code> implementations) are managed by the container or scope in which they are instantiated. Managing means that the disposables are cached until the scope or container is disposed of, and then disposed of as well.</p>
+<p>Marking a disposable implementation as transient relieves the container of the responsibility of managing the disposable. There are three options:</p>
+<ul>
+<li>Sync-transient (discard management for <code>IDisposable</code>)</li>
+<li>Async-transient (discard management for <code>IAsyncDisposable</code>)</li>
+<li>Transient (discard management for both, <code>IDisposable</code> &amp; <code>IAsyncDisposable</code>)</li>
+</ul>
+<p>That is, if an implementation implements both disposal interfaces, then when the container is disposed of …</p>
+<ul>
+<li>Both disposal methods will be called if it's not marked as transient in any way.</li>
+<li>Only the sync disposal method will be called if it is marked async-transient.</li>
+<li>Only the async method will be called if it is marked as sync-transient.</li>
+<li>None of the disposal methods will be called if marked transient.</li>
+</ul>
+<p>In addition, there is an option to manually add disposables to disposal management using certain user-defined elements (<code>DIE_AddForDisposal</code> or <code>DIE_AddForDisposalAsync</code>). </p>
+<p>DIE will automatically generate the disposal methods on the container and scope classes, so the user isn't allowed to implement them. If managed async disposables exist, only the <code>IAsyncDisposable</code> interface will be implemented (this prevents blocking disposal calls in the generated code). Otherwise, both disposal interfaces are implemented. </p>
+<p>When disposing of the container, it is sufficient to call one of the disposal methods if both are present. Once you call one of the disposal methods, the container is locked against further instantiation. This means that subsequent calls to create functions or factories that have been injected will cause an exception to be thrown.</p>
+<h2 id="scopes-disposal-behavior">Scope's Disposal Behavior</h2>
+<p>In many ways, the disposal behavior of scopes is the same as that of containers. They implement the disposal interfaces, they manage disposables, you can manage disposal by marking implementations as transient, and you can use the user-defined elements to manually attach disposables.</p>
+<p>However, disposing of the scopes themselves is handled differently. Even the normal scope and the transient scope have different behaviors. The normal scope isn't intended to be manually disposed of, and is itself attached to the parent scope (the one it was created from) for disposal. </p>
+<p>The transient scope isn't attached to its parent scope. Instead, it's scope root implementation can get an <code>IDisposable</code> or <code>IAsyncDisposable</code> dependency injected which can be used to eagerly &amp; manually dispose of the transient scope prior to container disposal. However, transient scopes will still be attached to the containers disposal. Therefore, transient scopes can be used to eagerly dispose, but rest assured that they will be disposed at the latest when the container is disposed.</p>
+<p>Note: If async disposables are managed, then <code>IDisposable</code> injections won't work in transient scope root implementations. It'll cause a compile time error. Therefore it is always safer and recommended to use an <code>IAsyncDisposable</code> injection instead, which should always work.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../user-defined-elements/" class="btn btn-neutral float-left" title="User-defined Elements"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../injections/" class="btn btn-neutral float-right" title="Injections">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../user-defined-elements/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../injections/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

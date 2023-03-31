@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="http://die.mrmeeseeks.net/decorators-composites/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Decorators & Composites - MrMeeseeks.DIE</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Decorators \u0026 Composites";
+        var mkdocs_page_input_path = "decorators-composites.md";
+        var mkdocs_page_url = "/decorators-composites/";
+      </script>
+    
+    <script src="../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> MrMeeseeks.DIE
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../getting-started/">Getting Started</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../configuration/">Configuration</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../naming-rules/">Naming Rules</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../scoping/">Scoping</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../user-defined-elements/">User-defined Elements</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../disposal/">Disposal</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../injections/">Injections</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../async-support/">Async Support</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../generics-support/">Generics Support</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">Decorators & Composites</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#why-is-the-container-responsible-for-decorators-composites">Why Is The Container Responsible For Decorators &amp; Composites?</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#special-kind-of-implementation">Special Kind Of Implementation</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#decorators">Decorators</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#example">Example</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#requirements">Requirements</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#some-remarks">Some Remarks</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#composites">Composites</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#example_1">Example</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#requirements_1">Requirements</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#some-remarks_1">Some Remarks</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#combinations">Combinations</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../initializers/">Initializers</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../glossary/">Glossary</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">MrMeeseeks.DIE</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>Decorators & Composites</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="decorators-composites">Decorators &amp; Composites</h1>
+<p>The purpose of both decorators &amp; composites is to transparently add functionality to an instance of an interface. They do this by wrapping one or more instances of that interface and implementing the interface themselves. The main difference is that while a decorator wraps a single instance, a composite wraps a collection of instances. Therefore, the decorator is used to extend functionality to a decorated instance, and the composite is used to aggregate over multiple instances. The book "Design Patterns" by the Gang of Four is recommended for a better and more thorough description of these two patterns.</p>
+<h2 id="why-is-the-container-responsible-for-decorators-composites">Why Is The Container Responsible For Decorators &amp; Composites?</h2>
+<p>Because decorators and composites implement the same interface they're wrapping, they become transparent as soon as they're injected as that interface. The consuming side that gets an instance of such an interface injected is completely unaware of it. The consumer neither knows nor makes any assumptions about whether the injected instance is the implementation, or whether there is a chain of decorators in between, or whether it is a composition of implementations. And that is exactly what we are doing with dependency injection: externalizing such responsibilities (decorating &amp; composing interfaces). When using a container, the external entity that manages decorators and composites can only be the container, because it is the entity that injects the dependencies. This is why DIE supports the use of decorators &amp; composites.</p>
+<h2 id="special-kind-of-implementation">Special Kind Of Implementation</h2>
+<p>Decorators &amp; Composites are considered implementations in DIE and must be registered/aggregated as such. However, they are a special type of implementation. They won't be used as standalone implementations, but always only in addition to "pure" implementations.</p>
+<h2 id="decorators">Decorators</h2>
+<h3 id="example">Example</h3>
+<pre><code class="language-csharp">internal interface IInterface
+{
+    IInterface Decorated { get; }
+}
+
+internal class Dependency : IInterface
+{
+    public IInterface Decorated =&gt; this;
+}
+
+internal class Decorator : IInterface, IDecorator&lt;IInterface&gt;
+{
+    public Decorator(IInterface decoratedNormal) =&gt; 
+        Decorated = decoratedNormal;
+
+    public IInterface Decorated { get; }
+}
+</code></pre>
+<h3 id="requirements">Requirements</h3>
+<ul>
+<li>Implement the interface you want to decorate (e.g., <code>IInterface</code>)</li>
+<li>Implement the marker decorator interface (e.g. <code>IDecorator&lt;&gt;</code>), which will be registered with a <code>DecoratorAbstractionAggregation</code> attribute.<ul>
+<li>The decorator interface should have its generic parameter set to the decorated interface: <code>IDecorator&lt;IInterface&gt;</code>.</li>
+</ul>
+</li>
+<li>Should have a constructor parameter of the type of the decorated interface</li>
+</ul>
+<h3 id="some-remarks">Some Remarks</h3>
+<p>If a decorated interface has multiple decorators registered, you must configure the order in which the decorators are applied, since DIE can't assume any by itself. You can configure an individual decorator sequence per decorated type and/or a fallback sequence configuration for the decorated interface. If you configure an empty sequence, you're effectively disabling decoration.</p>
+<p>If a decorated interface has only one decorator, then a sequence decoration isn't necessary. DIE assumes the intent of decorator usage by its existence, and there's no ambiguity about which decorator to apply first.</p>
+<p>Decorators are never scoped instances, even if the decorated instance is scoped.</p>
+<h2 id="composites">Composites</h2>
+<h3 id="example_1">Example</h3>
+<pre><code class="language-csharp">internal interface IInterface
+{
+    IReadOnlyList&lt;IInterface&gt; Composites { get; }
+}
+
+internal class BasisA : IInterface
+{
+    public IReadOnlyList&lt;IInterface&gt; Composites =&gt; new List&lt;IInterface&gt; { this };
+}
+
+internal class BasisB : IInterface
+{
+    public IReadOnlyList&lt;IInterface&gt; Composites =&gt; new List&lt;IInterface&gt; { this };
+}
+
+internal class Composite : IInterface, IComposite&lt;IInterface&gt;
+{
+    public Composite(IReadOnlyList&lt;IInterface&gt; composites) =&gt; 
+        Composites = composites;
+
+    public IReadOnlyList&lt;IInterface&gt; Composites { get; }
+}
+</code></pre>
+<h3 id="requirements_1">Requirements</h3>
+<ul>
+<li>Implement the interface that will be composited (e.g., <code>IInterface</code>)</li>
+<li>Implement the marker composite interface (e.g. <code>IComposite&lt;&gt;</code>), which will be registered with a <code>CompositeAbstractionAggregation</code> attribute.<ul>
+<li>The composite interface should have its generic parameter set to the composited interface: <code>IComposite&lt;IInterface&gt;</code>.</li>
+</ul>
+</li>
+<li>Should have a constructor parameter of the collection type of the composite interface</li>
+</ul>
+<h3 id="some-remarks_1">Some Remarks</h3>
+<p>Composites are never scoped instances, even if all of the composite instances are scoped.</p>
+<p>You can have only one composite type per interface.</p>
+<h2 id="combinations">Combinations</h2>
+<p>If the interface has multiple implementations and is both decorated and composited, then you can combine decorators and composites however you like. You can even decorate the composite.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../generics-support/" class="btn btn-neutral float-left" title="Generics Support"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../initializers/" class="btn btn-neutral float-right" title="Initializers">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../generics-support/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../initializers/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

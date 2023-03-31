@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="http://die.mrmeeseeks.net/configuration/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Configuration - MrMeeseeks.DIE</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Configuration";
+        var mkdocs_page_input_path = "configuration.md";
+        var mkdocs_page_url = "/configuration/";
+      </script>
+    
+    <script src="../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> MrMeeseeks.DIE
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../getting-started/">Getting Started</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">Configuration</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#minimal-example">Minimal Example</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#use-cases-of-configuration">Use cases of configuration</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#characteristics-focused-configurations">Characteristics-focused Configurations</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#abstraction-configurations">Abstraction Configurations</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#recommended-marker-interfaces-and-their-configurations">Recommended Marker Interfaces And Their Configurations</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#aggregating-choosing-and-filtering">Aggregating, Choosing, and Filtering</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#aggregation">Aggregation</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#choice">Choice</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#filter">Filter</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#descriptions-of-the-attributes">Descriptions Of The Attributes</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#configuration-levels">Configuration Levels</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../naming-rules/">Naming Rules</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../scoping/">Scoping</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../user-defined-elements/">User-defined Elements</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../disposal/">Disposal</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../injections/">Injections</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../async-support/">Async Support</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../generics-support/">Generics Support</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../decorators-composites/">Decorators & Composites</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../initializers/">Initializers</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../glossary/">Glossary</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">MrMeeseeks.DIE</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>Configuration</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="configuration">Configuration</h1>
+<p>The following features have a high value for DIE:</p>
+<ol>
+<li>Unambiguousness</li>
+<li>Convenience</li>
+</ol>
+<p>This means that DIE tries to be as convenient as possible while still maintaining unambiguousness.</p>
+<h2 id="minimal-example">Minimal Example</h2>
+<p>Let's show this by going through the minimal example:</p>
+<pre><code class="language-csharp">internal interface IInterface {}
+
+internal class Class : IInterface {}
+
+[AllImplementationsAggregation]
+[CreateFunction(typeof(IInterface), &quot;Create&quot;)]
+internal partial class Container {}
+</code></pre>
+<p>The <code>CreateFunctionAttribute</code> will result in the creation of the following three functions:</p>
+<ul>
+<li><code>public IInterface Create()</code></li>
+<li><code>public Task&lt;IInterface&gt; CreateAsync()</code></li>
+<li><code>public ValueTask&lt;IInterface&gt; CreateValueAsync()</code></li>
+</ul>
+<p>Each of these will return an instance of type <code>Class</code> either synchronously or asynchronously.</p>
+<p>The <code>AllImplementationsAggregation</code> is the way to tell the container to consider all accessible implementations of the entire code base. This includes the referenced assemblies (which includes the .Net assemblies). For this example, it would be sufficient to just explicitly configure the single implementation. However, using <code>AllImplementationsAggregation</code> is a more versatile approach, as you can now simply add more implementations without having to change the configuration. Thus, this approach seems more appropriate for a minimalist example. It also shows the convenience-based approach that DIE takes.</p>
+<p>Another aspect that is convenient in this example is that you don't need to register the implementation <code>Class</code> to be used for the interface <code>IInterface</code>. - public ValueTask<IInterface> CreateValueAsync()`.</p>
+<p>Each of these will return an instance of type <code>Class</code> either synchronously or asynchronously.</p>
+<p>The <code>AllImplementationsAggregation</code> is the way to tell the container to consider all accessible implementations of the entire code base. This includes the referenced assemblies (which includes the .Net assemblies). For this example, it would be sufficient to just explicitly configure the single implementation. However, using <code>AllImplementationsAggregation</code> is a more versatile approach, as you can now simply add more implementations without having to change the configuration. Thus, this approach seems more appropriate for a minimalist example. It also shows the convenience-based approach that DIE takes.</p>
+<p>Another aspect that is convenient in this example is that you don't need to register the implementation <code>Class' to be used for the interface</code>IInterface'. That's because there is only one known implementation of <code>Class</code> for <code>IInterface</code> (and it has only one constructor - the implicit default one). From the container's point of view, there is only one possible way to resolve <code>Interface</code>, and therefore the container can decide on it's own without you telling it explicitly.</p>
+<p>However, if there were other implementations for the interface that the container knew about, it wouldn't compile. In this case, you would need to extend the configuration by telling the container which of the implementations for the interface to use. This way, unambiguousness is maintained.</p>
+<h2 id="use-cases-of-configuration">Use cases of configuration</h2>
+<p>Unfortunately, even the best codebases cannot be modeled in such a way that the container can automatically resolve everything once they reach a certain level of content or complexity. There may be configuration required to take advantage of advanced features like decorators &amp; composites, or to resolve ambiguities like multiple implementations of interfaces or multiple constructors of implementations. That is why DIE has configuration capabilities, so you should be able to teach the container your intentions.</p>
+<h2 id="characteristics-focused-configurations">Characteristics-focused Configurations</h2>
+<p>Typically, DI containers take an implementation-oriented approach to configurations. That is, they start with the implementation and then add characteristics (e.g., scoping, transitivity, and so on). DIE chooses a different path.</p>
+<p>DIE reverses the traditional configuration principle by focusing on characteristics. The configuration attributes represent characteristics and collect the implementations that should apply them.</p>
+<h2 id="abstraction-configurations">Abstraction Configurations</h2>
+<p>You can also register abstractions (e.g. interfaces). In this case, however, the characteristics are not applied to the abstractions themselves, but to all registered implementations that implement or inherit from the abstraction. This way you can use marker interfaces and don't have to register each implementation to a characteristics individually. For example, the <code>ContainerInstanceImplementationAggregation</code> attribute has an alternative <code>ContainerInstanceAbstractionAggregation</code> attribute.</p>
+<p>Marker interfaces can only be used by your own code. Therefore, even if you decide to use marker interfaces, using "implementation" attributes to assign characteristics to external implementations (e.g., .Net types) may still be the only feasible way.</p>
+<h3 id="recommended-marker-interfaces-and-their-configurations">Recommended Marker Interfaces And Their Configurations</h3>
+<p>The marker interfaces:</p>
+<pre><code class="language-csharp">public interface IContainerInstance { }
+public interface ITransientScopeInstance { }
+public interface IScopeInstance { }
+public interface ITransientScopeRoot { }
+public interface IScopeRoot { }
+public interface ITransient { }
+public interface ISyncTransient { }
+public interface IAsyncTransient { }
+public interface IDecorator&lt;T&gt; { }
+public interface IComposite&lt;T&gt; { }
+public interface IInitializer
+{
+    void Initialize();
+}
+public interface ITaskInitializer
+{
+    Task InitializeAsync();
+}
+public interface IValueTaskInitializer
+{
+    ValueTask InitializeAsync();
+}
+</code></pre>
+<p>The configurations of the marker interfaces:</p>
+<pre><code class="language-csharp">[assembly:ContainerInstanceAbstractionAggregation(typeof(IContainerInstance))]
+[assembly:TransientScopeInstanceAbstractionAggregation(typeof(ITransientScopeInstance))]
+[assembly:ScopeInstanceAbstractionAggregation(typeof(IScopeInstance))]
+[assembly:TransientScopeRootAbstractionAggregation(typeof(ITransientScopeRoot))]
+[assembly:ScopeRootAbstractionAggregation(typeof(IScopeRoot))]
+[assembly:TransientAbstractionAggregation(typeof(ITransient))]
+[assembly:SyncTransientAbstractionAggregation(typeof(ISyncTransient))]
+[assembly:AsyncTransientAbstractionAggregation(typeof(IAsyncTransient))]
+[assembly:DecoratorAbstractionAggregation(typeof(IDecorator&lt;&gt;))]
+[assembly:CompositeAbstractionAggregation(typeof(IComposite&lt;&gt;))]
+[assembly:Initializer(typeof(IInitializer), nameof(IInitializer.Initialize))]
+[assembly:Initializer(typeof(ITaskInitializer), nameof(ITaskInitializer.InitializeAsync))]
+[assembly:Initializer(typeof(IValueTaskInitializer), nameof(IValueTaskInitializer.InitializeAsync))]
+</code></pre>
+<p>The location of the marker interfaces can be in a separate assembly and therefore doesn't need to know anything about DIE. Only the location of the configurations needs to reference the namespace of the marker interface and DIE.</p>
+<p>By using marker interfaces, container configuration becomes much simpler, and focuses more on specialized settings. However, with DIE, it's up to you whether you want to use a "marker interface" configuration style.</p>
+<h2 id="aggregating-choosing-and-filtering">Aggregating, Choosing, and Filtering</h2>
+<p>Most of DIE's configuration features fall into one of the following categories: Aggregation, Selection, Filter.</p>
+<h3 id="aggregation">Aggregation</h3>
+<p>The aggregation configurations gather all types of an associated characteristic. For example, the <code>ContainerInstanceImplementationAggregation</code> attribute gathers all implementation types which shall be instantiated once and shared throughout the container. </p>
+<p>Aggregation is about collecting knowledge. The container will make decisions based only on the aggregated knowledge. If a container is configured to know of only one implementation of an interface that actually has multiple implementations, the container would still behave as if that interface had only one implementation.</p>
+<h3 id="choice">Choice</h3>
+<p>Choices are a kind of configuration that let's you resolve ambiguities. For example, when an implementation has multiple constructors. Choices can also be a more convenient alternative to filtering. Another example: if an interface has multiple implementations, you can aggregate all the implementations and choose one for the interface. This way it is possible to inject dependencies of the interface type and the interface type collection (<code>IReadOnlyList&lt;IInterface&gt;</code>) into the same container (or scope).</p>
+<h3 id="filter">Filter</h3>
+<p>For each aggregation and choice configuration, there is a filter configuration that does the exact opposite (filters aggregated items or removes choices).</p>
+<p>It's important to note that filters are applied only at the "the beginning" of the configured scope. That is, you can only filter aggregations and choices set in the parent configuration level.</p>
+<h2 id="descriptions-of-the-attributes">Descriptions Of The Attributes</h2>
+<p><a href="implementations/">Implementations</a></p>
+<p><a href="disposal/">Disposal</a></p>
+<p><a href="scoping/">Scoping</a></p>
+<p><a href="decorator-composite/">Decorator/Composite</a></p>
+<p><a href="generics/">Generics</a></p>
+<p><a href="miscellaneous/">Miscellaneous</a></p>
+<h2 id="configuration-levels">Configuration Levels</h2>
+<p>There are three levels of configuration:</p>
+<ol>
+<li>Assembly</li>
+<li>Container</li>
+<li>(Transient) Scope</li>
+</ol>
+<p>In the currently configured level, the configurations of the previous level are applied first, then the filter configurations, and then the aggregations and choices.</p>
+<p>If you don't need to write a DI container implementation yourself, and therefore don't need to have many containers in the test project, then the benefit of having an assembly-level configuration may not be obvious. Typically, a single container would be sufficient for a code base, and I would actually recommend having only one container. If not for sharing configurations between multiple containers, then why would you need an assembly level configuration? A simple example use case would be: you want to aggregate all implementations at the container level, but with a few exceptions that should be omitted. An easy way to accomplish this would be to aggregate all implementations at the assembly level and filter the exceptions at the container level.</p>
+<p>Another important aspect to note is that configurations of both transient and normal scopes inherit the configuration of the container they're in. This means that configuration-wise, transient scopes and normal scopes are peers.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../getting-started/" class="btn btn-neutral float-left" title="Getting Started"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../naming-rules/" class="btn btn-neutral float-right" title="Naming Rules">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../getting-started/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../naming-rules/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

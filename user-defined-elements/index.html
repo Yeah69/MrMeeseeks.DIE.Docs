@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="http://die.mrmeeseeks.net/user-defined-elements/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>User-defined Elements - MrMeeseeks.DIE</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "User-defined Elements";
+        var mkdocs_page_input_path = "user-defined-elements.md";
+        var mkdocs_page_url = "/user-defined-elements/";
+      </script>
+    
+    <script src="../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> MrMeeseeks.DIE
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../getting-started/">Getting Started</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../configuration/">Configuration</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../naming-rules/">Naming Rules</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../scoping/">Scoping</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">User-defined Elements</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#factories">Factories</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#requirements">Requirements</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#sample">Sample</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#remarks">Remarks</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#constructor-parameters">Constructor Parameters</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#requirements_1">Requirements</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#sample_1">Sample</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#remarks_1">Remarks</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#properties">Properties</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#requirements_2">Requirements</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#sample_2">Sample</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#remarks_2">Remarks</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#initializer-parameters">Initializer Parameters</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#requirements_3">Requirements</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#sample_3">Sample</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#remarks_3">Remarks</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#adding-for-disposal">Adding For Disposal</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#requirements_4">Requirements</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#sample_4">Sample</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#remarks_4">Remarks</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../disposal/">Disposal</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../injections/">Injections</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../async-support/">Async Support</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../generics-support/">Generics Support</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../decorators-composites/">Decorators & Composites</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../initializers/">Initializers</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../glossary/">Glossary</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">MrMeeseeks.DIE</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>User-defined Elements</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="user-defined-elements">User-Defined Elements</h1>
+<p>User-defined elements are features that allow customization of certain parts of the generated container. User-defined elements must always be defined within the container, transient scope, or scope class. They only apply to the scope in which they are defined, i.e. they don't inherit from the container to child scopes.</p>
+<h2 id="factories">Factories</h2>
+<p>Factories can be used to shortcut the container and provide custom creation logic. You can choose from three types of factories: methods, properties, or fields. The identifiers of all factories must begin with <code>DIE_Factory</code>.</p>
+<h3 id="requirements">Requirements</h3>
+<ul>
+<li>Identifier starts with <code>DIE_Factory</code></li>
+<li><code>private</code></li>
+<li>Non-static</li>
+<li>Method<ul>
+<li>Non-void</li>
+<li>Parameters are all ordinary (not out/in/ref/params)</li>
+</ul>
+</li>
+<li>Property<ul>
+<li>Has to have a <code>get</code></li>
+</ul>
+</li>
+<li>Field<ul>
+<li>No further requirements</li>
+</ul>
+</li>
+</ul>
+<h3 id="sample">Sample</h3>
+<pre><code class="language-csharp">[CreateFunction(typeof(Root), &quot;Create&quot;)]
+internal sealed partial class Container
+{
+    private int DIE_Factory_int = 69;
+    private string DIE_Factory_Yeah =&gt; &quot;Yeah&quot;;
+    private FileInfo DIE_Factory_CurrentFile(ICurrentPath currentPath) =&gt; new (currentPath.Value);
+}
+</code></pre>
+<h3 id="remarks">Remarks</h3>
+<ul>
+<li>
+<p>The parameters of method factories are method injections and are created in the same way as regular constructor and property injections, i.e. the same configurations apply.</p>
+</li>
+<li>
+<p>Note that in this case, DIE won't automatically manage the disposables created by the factory. However, you can use the `AddForDisposal' custom element to manually add disposables for disposal management.</p>
+</li>
+</ul>
+<h2 id="constructor-parameters">Constructor Parameters</h2>
+<p>Instead of customizing the creation of a type with an user-defined factory, this will allow you to override certain constructor parameters.</p>
+<h3 id="requirements_1">Requirements</h3>
+<ul>
+<li>Identifier starts with <code>DIE_ConstrParams</code></li>
+<li><code>private</code></li>
+<li>Non-static</li>
+<li>void</li>
+<li><code>UserDefinedConstructorParametersInjection</code>-attribute</li>
+<li>Two kinds of parameters allowed<ul>
+<li>Ordinary</li>
+<li>Out parameters each of which has to match a constructor parameter name &amp; type</li>
+</ul>
+</li>
+</ul>
+<h3 id="sample_1">Sample</h3>
+<pre><code class="language-csharp">[CreateFunction(typeof(Dependency), &quot;Create&quot;)]
+internal sealed partial class Container
+{
+    [UserDefinedConstructorParametersInjection(typeof(Dependency))]
+    private void DIE_ConstrParam_Dependency(OtherDependency otherDependency, out int number) =&gt; number = otherDependency.Number;
+}
+</code></pre>
+<h3 id="remarks_1">Remarks</h3>
+<ul>
+<li>The ordinary parameters are method injections and are created in the same way as regular constructor and property injections, i.e. the same configurations apply.</li>
+<li>You can match and override multiple constructor parameters</li>
+</ul>
+<h2 id="properties">Properties</h2>
+<p>Instead of customizing the creation of a type with an user-defined factory, this will allow you to override certain properties.</p>
+<h3 id="requirements_2">Requirements</h3>
+<ul>
+<li>Identifier starts with <code>DIE_Props</code></li>
+<li><code>private</code></li>
+<li>Non-static</li>
+<li>void</li>
+<li><code>UserDefinedPropertiesInjection</code>-attribute</li>
+<li>Two kinds of parameters allowed<ul>
+<li>Ordinary</li>
+<li>Out parameters each of which has to match a property name &amp; type</li>
+</ul>
+</li>
+</ul>
+<h3 id="sample_2">Sample</h3>
+<pre><code class="language-csharp">[CreateFunction(typeof(Dependency), &quot;Create&quot;)]
+internal sealed partial class Container
+{
+    [UserDefinedPropertiesInjection(typeof(Dependency))]
+    private void DIE_ConstrParam_Dependency(OtherDependency otherDependency, out int Number) =&gt; Number = otherDependency.Number;
+}
+</code></pre>
+<h3 id="remarks_2">Remarks</h3>
+<ul>
+<li>The ordinary parameters are method injections and are created in the same way as regular constructor and property injections, i.e. the same configurations apply.</li>
+<li>You can match and override multiple properties</li>
+</ul>
+<h2 id="initializer-parameters">Initializer Parameters</h2>
+<p>Rather than customizing the creation of a type with an user-defined factory, this allows certain initializer parameters to be overridden.</p>
+<h3 id="requirements_3">Requirements</h3>
+<ul>
+<li>Identifier starts with <code>DIE_InitParams</code></li>
+<li><code>private</code></li>
+<li>Non-static</li>
+<li>void</li>
+<li><code>UserDefinedInitializerParametersInjection</code>-attribute</li>
+<li>Two kinds of parameters allowed<ul>
+<li>Ordinary</li>
+<li>Out parameters each of which has to match a constructor parameter name &amp; type</li>
+</ul>
+</li>
+</ul>
+<h3 id="sample_3">Sample</h3>
+<pre><code class="language-csharp">[CreateFunction(typeof(Dependency), &quot;Create&quot;)]
+internal sealed partial class Container
+{
+    [UserDefinedInitializerParametersInjection(typeof(Dependency))]
+    private void DIE_ConstrParam_Dependency(OtherDependency otherDependency, out int number) =&gt; number = otherDependency.Number;
+}
+</code></pre>
+<h3 id="remarks_3">Remarks</h3>
+<ul>
+<li>The ordinary parameters are method injections and are created in the same way as regular constructor and property injections, i.e. the same configurations apply.</li>
+<li>You can match and override multiple initializer parameters</li>
+</ul>
+<h2 id="adding-for-disposal">Adding For Disposal</h2>
+<p>You can declare partial methods that can be used to add disposables to the disposal management of the container (or scope).</p>
+<h3 id="requirements_4">Requirements</h3>
+<ul>
+<li>Identifier should be <code>DIE_AddForDisposal</code> (for <code>IDisposable</code>s) or <code>DIE_AddForDisposalAsync</code> (for <code>IAsyncDisposable</code>s)</li>
+<li><code>private</code></li>
+<li>Non-static</li>
+<li>partial</li>
+<li>void</li>
+<li>One parameter, either <code>IDisposable</code> or <code>IAsyncDisposable</code></li>
+<li>no own implementation</li>
+</ul>
+<h3 id="sample_4">Sample</h3>
+<pre><code class="language-csharp">[CreateFunction(typeof(Dependency), &quot;Create&quot;)]
+internal sealed partial class Container
+{
+    private Dependency DIE_Factory_Dependency
+    {
+        get
+        {
+            var dependency = new Dependency();
+            DIE_AddForDisposal(dependency);
+            return dependency;
+        }
+    }
+
+    private partial void DIE_AddForDisposal(IDisposable disposable);
+}
+</code></pre>
+<h3 id="remarks_4">Remarks</h3>
+<ul>
+<li>When such a function is declared, the container assumes that it has disposables. Therefore, it will always generate the disposal code in that case, even if this user-defined function isn't called once.</li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../scoping/" class="btn btn-neutral float-left" title="Scoping"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../disposal/" class="btn btn-neutral float-right" title="Disposal">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../scoping/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../disposal/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

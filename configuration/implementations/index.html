@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="http://die.mrmeeseeks.net/configuration/implementations/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Implementation Configurations - MrMeeseeks.DIE</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Implementation Configurations";
+        var mkdocs_page_input_path = "configuration/implementations.md";
+        var mkdocs_page_url = "/configuration/implementations/";
+      </script>
+    
+    <script src="../../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> MrMeeseeks.DIE
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../getting-started/">Getting Started</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../">Configuration</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../naming-rules/">Naming Rules</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../scoping/">Scoping</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../user-defined-elements/">User-defined Elements</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../disposal/">Disposal</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../injections/">Injections</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../async-support/">Async Support</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../generics-support/">Generics Support</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../decorators-composites/">Decorators & Composites</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../initializers/">Initializers</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../glossary/">Glossary</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">MrMeeseeks.DIE</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>Implementation Configurations</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="implementation-configurations">Implementation Configurations</h1>
+<h2 id="purpose">Purpose</h2>
+<p>Implementations must be collected in order to be considered by DIE. Otherwise, they won't be considered as substitutes for their interface, and injecting the type explicitly still won't compile. The container or scope needs to know which implementations to consider, so the purpose of implementation configuration is to tell them.</p>
+<p>Other configuration options include choosing constructors (if an implementation has multiple), properties for property injections, an implementation for an abstraction (if it has multiple implementations), and collections of implementations for collection injections of abstractions.</p>
+<h2 id="attributes">Attributes</h2>
+<ul>
+<li><strong>AllImplementationAggregationAttribute</strong> Aggregates all implementations of the current assembly and all referenced assemblies. This includes .Net assemblies and assemblies from nuget packages.</li>
+</ul>
+<pre><code class="language-csharp">[assembly:AllImplementationsAggregation]
+</code></pre>
+<ul>
+<li><strong>FilterAllImplementationAggregationAttribute</strong> Filters all implementations.</li>
+</ul>
+<pre><code class="language-csharp">[FilterAllImplementationsAggregation]
+</code></pre>
+<ul>
+<li><strong>AssemblyImplementationsAggregationAttribute</strong> Aggregates all implementations of a given assembly. Assemblies are passed by referencing any type from the assembly, because assemblies themselves cannot be referenced in code. You may pass multiple types to this attribute.</li>
+</ul>
+<pre><code class="language-csharp">[AssemblyImplementationsAggregation(typeof(MrMeeseeks.DIE.TestNotInternalsVisibleToChild.AssemblyInfo))]
+</code></pre>
+<ul>
+<li><strong>FilterAssemblyImplementationsAggregationAttribute</strong> Filters all implementations of a given assembly. Assemblies are passed by any type from the assembly because assemblies themselves cannot be referenced in code. You may pass multiple types to this attribute.</li>
+</ul>
+<pre><code class="language-csharp">[FilterAssemblyImplementationsAggregation(typeof(MrMeeseeks.DIE.TestNotInternalsVisibleToChild.AssemblyInfo))]
+</code></pre>
+<ul>
+<li><strong>ImplementationAggregationAttribute</strong> Aggregates all given implementations. Types passed must be implementations. You may pass multiple types to this attribute.</li>
+</ul>
+<pre><code class="language-csharp">[ImplementationAggregation(typeof(DateTime), typeof(FileInfo))]
+</code></pre>
+<ul>
+<li><strong>FilterImplementationAggregationAttribute</strong> Filters all given implementations. Types passed must be implementations. You may pass multiple types to this attribute.</li>
+</ul>
+<pre><code class="language-csharp">[FilterImplementationAggregation(typeof(DateTime), typeof(FileInfo))]
+</code></pre>
+<ul>
+<li><strong>ConstructorChoiceAttribute</strong> Selects a constructor for the given implementation type to be used by DIE. If an implementation has multiple constructors that could potentially be used, choosing a constructor is mandatory for the implementation to be usable. Pass the implementation type first, then the types of the constructor parameters in the same order. To choose the parameterless constructor, just pass the only implementation type.</li>
+</ul>
+<pre><code class="language-csharp">[ConstructorChoice(typeof(Implementation), typeof(string), typeof(int))]
+</code></pre>
+<ul>
+<li><strong>FilterConstructorChoiceAttribute</strong> Discards the inherited constructor choice for the given implementation type. Just pass the implementation type.</li>
+</ul>
+<pre><code class="language-csharp">[FilterConstructorChoice(typeof(Implementation))]
+</code></pre>
+<ul>
+<li><strong>PropertyChoiceAttribute</strong> Selects the properties to be injected during instantiation. These properties must be mutable for the container (i.e. either public set/init or internal set/init within the same assembly or with appropriate <code>InternalsVisibleTo</code> usage). If no property choice is active, DIE will inject all accessible init properties by default. On the other hand, if a property choice is active, DIE will not inject any init properties that are not passed to the choice. Pass the implementation type first, followed by the names of the properties to be injected as strings.</li>
+</ul>
+<pre><code class="language-csharp">[PropertyChoice(typeof(Implementation), &quot;Logger&quot;, &quot;Settings&quot;)]
+</code></pre>
+<ul>
+<li><strong>FilterPropertyChoiceAttribute</strong> Discards the current property choice for the given implementation type. Just pass the implementation type.</li>
+</ul>
+<pre><code class="language-csharp">[FilterPropertyChoice(typeof(Implementation))]
+</code></pre>
+<ul>
+<li><strong>ImplementationChoiceAttribute</strong> For the given abstraction type, it chooses the given implementation type, even if multiple implementations are registered. Pass the abstraction type first and the implementation type second.</li>
+</ul>
+<pre><code class="language-csharp">[ImplementationChoice(typeof(IInterface), typeof(Implementation))]
+</code></pre>
+<ul>
+<li><strong>FilterImplementationChoiceAttribute</strong> Discards the current implementation choice for the given abstraction type. Pass only the abstraction type.</li>
+</ul>
+<pre><code class="language-csharp">[FilterImplementationChoice(typeof(IInterface))]
+</code></pre>
+<ul>
+<li><strong>ImplementationCollectionChoiceAttribute</strong> For the given abstraction type, it chooses the implementation types for collection injections. Pass the abstraction type first, then the implementation types.</li>
+</ul>
+<pre><code class="language-csharp">[ImplementationCollectionChoice(typeof(IInterface), typeof(ImplementationA), typeof(ImplementationB))]
+</code></pre>
+<ul>
+<li><strong>FilterImplementationCollectionChoiceAttribute</strong> Discards the inherited implementation collection choice for the given abstraction type. Pass only the abstraction type.</li>
+</ul>
+<pre><code class="language-csharp">[FilterImplementationCollectionChoice(typeof(IInterface))]
+</code></pre>
+<h2 id="recommendations">Recommendations</h2>
+<ul>
+<li>Use <code>AllImplementationsAggregation</code> at the assembly level, so that you can opt out with smaller filters starting at the container level.</li>
+<li>If you want to configure each type explicitly, use only `ImplementationAggregation'.</li>
+<li>Constructor choices are only mandatory if the implementation has multiple constructor candidates. If you know for sure that an implementation has only one usable constructor, you don't need to configure it.</li>
+<li>Constructor choice is especially important for implementations of assemblies that you don't have control over (such as .Net assemblies), because you can't make sure that these implementations have only one constructor. </li>
+<li>Because DIE takes full control of instantiation, init properties are injected by default. This doesn't apply to set properties. If you want to override this behavior, use property choices. If a property choice is active that doesn't contain the name of an init property, then that property will not be injected. If a property choice is active that contains the name of a set property, then the property will be injected. To completely disable property injection for an implementation, just pass the implementation type to the property choice.</li>
+</ul>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

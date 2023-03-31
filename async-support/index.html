@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="http://die.mrmeeseeks.net/async-support/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Async Support - MrMeeseeks.DIE</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Async Support";
+        var mkdocs_page_input_path = "async-support.md";
+        var mkdocs_page_url = "/async-support/";
+      </script>
+    
+    <script src="../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> MrMeeseeks.DIE
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../getting-started/">Getting Started</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../configuration/">Configuration</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../naming-rules/">Naming Rules</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../scoping/">Scoping</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../user-defined-elements/">User-defined Elements</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../disposal/">Disposal</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../injections/">Injections</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">Async Support</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#async-initializer">Async Initializer</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#async-createfunction">Async CreateFunction</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#valuetask-wrapped-dependencies">(Value)Task-wrapped Dependencies</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#async-disposal">Async Disposal</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#remarks-on-generated-code">Remarks On Generated Code</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#summary">Summary</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../generics-support/">Generics Support</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../decorators-composites/">Decorators & Composites</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../initializers/">Initializers</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../glossary/">Glossary</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">MrMeeseeks.DIE</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>Async Support</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="async-support">Async Support</h1>
+<p>DIE supports asynchronous programming in three ways:</p>
+<ol>
+<li>Async initializer</li>
+<li>Async <code>CreateFunction</code></li>
+<li>(Value)Task-wrapped dependencies</li>
+<li>Async disposal</li>
+</ol>
+<h2 id="async-initializer">Async Initializer</h2>
+<p>The initialization is always called by DIE right after the instance is created and before it is used anywhere else. If the initialization returns a <code>ValueTask</code> or a <code>Task</code> then the initialization is asynchronous. From DIE's point of view this also makes the instantiation asynchronous.</p>
+<p>With synchronous initialization, this would mean that the instance could not be injected as a dependency into another instance until the initialization method was executed to completion. With asynchronous initialization, however, it depends on whether the asynchronously initialized dependency is injected directly or wrapped into a <code>ValueTask</code> or a <code>Task</code>. We'll look at both ways next. One at a time.</p>
+<h2 id="async-createfunction">Async <code>CreateFunction</code></h2>
+<p>In a codebase where all the implementations used are purely synchronous instantiations, using a <code>CreateFunction</code> attribute on a type <code>T</code> will result in the creation of three functions: one that returns an instance of <code>T</code> synchronously, and two that would return the instance wrapped in a <code>ValueTask&lt;T&gt;</code> and a <code>Task&lt;T&gt;</code> respectively. In the synchronous codebase, the latter two are just calling the synchronous function and wrapping the result. Therefore, all three functions are functionally equivalent in terms of creating the instance. But what would change if we had asynchronous instantiation in the codebase?</p>
+<p>If the code base has any async dependencies that aren't wrapped at injection, then DIE will generate <code>await</code> statements before the dependency is injected. Consequently, the instantiation of the root instance can only be asynchronous, also because of the following two design decisions:</p>
+<ul>
+<li>DIE will never use breaking calls like <code>.Result</code> or <code>.Wait()</code>.<ul>
+<li>Otherwise deadlocks could be caused by the generated code.</li>
+</ul>
+</li>
+<li>DIE will never switch synchronization contexts using <code>Task.Run(…)</code> or <code>.ConfigureAwait(false)</code>.<ul>
+<li>This means that if you need your instance to be created on a specific thread - like the main thread for UI applications - you just need to call the CreateFunction from that thread.</li>
+</ul>
+</li>
+</ul>
+<p>Both of these design choices also imply that there can be no synchronous <code>CreateFunction</code> if any non-wrapped async instantiation is required. So if you still need a synchronous CreateFunction, you would need to wrap the dependencies. We'll look at this next.</p>
+<h2 id="valuetask-wrapped-dependencies"><code>(Value)Task</code>-wrapped Dependencies</h2>
+<p>Let's say you have an async initialized implementation called <code>AsyncDependency</code>, and it is a dependency of <code>Instance</code>. Instead of injecting the instance of <code>AsyncDependency</code> into the instance of <code>Instance</code> the usual way, by injecting it directly into the constructor:</p>
+<pre><code class="language-csharp">
+internal class Instance
+{
+    internal Instance(
+        AsyncDependency asyncDependency)
+    {
+        // …
+    }
+}
+
+</code></pre>
+<p>With DIE, you have a second alternative option by injecting it wrapped in a <code>ValueTask&lt;AsyncDependency&gt;</code> or a <code>Task&lt;AsyncDependency&gt;</code>:</p>
+<pre><code class="language-csharp">
+internal class Instance
+{
+    internal Instance(
+        ValueTask&lt;AsyncDependency&gt; asyncDependency)
+    {
+        // …
+    }
+}
+
+</code></pre>
+<p>This way, DIE wouldn't need to use an <code>away</code> statement and thus still keep the synchronous <code>CreateFunction</code> enabled. Of course, this is only true if the <code>Instance</code> instance doesn't need the <code>AsyncDependency</code> instance in its constructor or initialization, because that would mean unwrapping the <code>AsyncDependency</code> instance and giving the <code>Instance</code> instance asynchronous initialization itself. This means that wrapping dependencies works best for use cases where the dependencies aren't needed at instantiation, but later.</p>
+<p>Another use case is whenever you want to start constructing the dependent instances before the async initialization of the dependencies is done. Otherwise, without wrapping, the initialization of the dependency is waited for before the construction of the dependent instance starts.</p>
+<p>If the use cases aren't relevant to you, and you don't need a synchronous `CreateFunction' in the case of asynchronous initializations, you can just inject the dependencies directly as usual. Wrapping is just an alternative supported by DIE.</p>
+<h2 id="async-disposal">Async Disposal</h2>
+<p>DIE will always let the container implement <code>IAsyncDisposable</code>. So if you want to make sure the container is always properly disposed of, use the <code>IAsyncDisposable</code> interface for disposal. If the container needs to track a dependency that implements <code>IAsyncDisposable</code>, then the container's <code>IDisposable</code> will be discarded, because at that point it's no longer a valid option (without blocking calls).</p>
+<h2 id="remarks-on-generated-code">Remarks On Generated Code</h2>
+<ul>
+<li>Whenever appropriate, DIE will prefer a <code>ValueTask&lt;T&gt;</code> as the return type for an async function.<ul>
+<li>Exceptions are where an explicit <code>Task&lt;T&gt;</code> is expected.</li>
+</ul>
+</li>
+<li>If necessary, DIE can and will switch from <code>ValueTask&lt;T&gt;</code> to <code>Task&lt;T&gt;</code> and vice versa.<ul>
+<li>Note that forcing DIE to convert to <code>Task&lt;T&gt;</code> will cause more allocations on the heap which may have been avoided.</li>
+</ul>
+</li>
+</ul>
+<h2 id="summary">Summary</h2>
+<ul>
+<li>Use async initializers if you need to call asynchronous methods during instantiation.</li>
+<li>Wrap asynchronous dependencies in a <code>ValueTask&lt;T&gt;' or a</code>Task<T>' if you don't want the container to await async initialization before injection. Otherwise…</li>
+<li>The async dependencies will be awaited and therefore the sync <code>CreateFunction</code> will be discarded during code generation.</li>
+<li>DIE will never use blocking calls to make asynchronous instances synchronous</li>
+<li>DIE will never change the synchronization context in the generated code.<ul>
+<li>Therefore, no use of <code>Task.Run(…)</code>.</li>
+<li>Therefore, no use of <code>await MethodAsync().ConfigureAwait(false)</code>.</li>
+</ul>
+</li>
+<li>DIE will prefer to generate code using <code>ValueTask</code> over <code>Task</code>.</li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../injections/" class="btn btn-neutral float-left" title="Injections"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../generics-support/" class="btn btn-neutral float-right" title="Generics Support">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../injections/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../generics-support/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

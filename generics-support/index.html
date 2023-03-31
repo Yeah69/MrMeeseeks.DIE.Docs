@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="http://die.mrmeeseeks.net/generics-support/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Generics Support - MrMeeseeks.DIE</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Generics Support";
+        var mkdocs_page_input_path = "generics-support.md";
+        var mkdocs_page_url = "/generics-support/";
+      </script>
+    
+    <script src="../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> MrMeeseeks.DIE
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../getting-started/">Getting Started</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../configuration/">Configuration</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../naming-rules/">Naming Rules</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../scoping/">Scoping</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../user-defined-elements/">User-defined Elements</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../disposal/">Disposal</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../injections/">Injections</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../async-support/">Async Support</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">Generics Support</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#configuration">Configuration</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#usage">Usage</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#unspecified-generic-type-parameters-with-interface-injections">Unspecified Generic Type Parameters With Interface Injections</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../decorators-composites/">Decorators & Composites</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../initializers/">Initializers</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../glossary/">Glossary</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">MrMeeseeks.DIE</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>Generics Support</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="generics-support">Generics Support</h1>
+<p>DIE supports the use of generic types. This includes both configuration and usage.</p>
+<h2 id="configuration">Configuration</h2>
+<p>Generic implementations can be configured to do the same things as non-generic implementations. However, generic implementations must be passed as unbound types. This means that instead of passing a concrete generic type parameter, it is left empty. Configurations for this unbound generic type then apply to all of its bound generic type variants. For example:</p>
+<pre><code class="language-csharp">[ContainerInstanceImplementationAggregation(
+    typeof(DependencyA&lt;&gt;),
+    typeof(DependencyB&lt;,&gt;))]
+</code></pre>
+<p>This will configure all variants of the generic implementation <code>DependencyA&lt;…&gt;</code> (e.g. <code>DependencyA&lt;int&gt;</code> or <code>DependencyA&lt;string&gt;</code>) to be a container instance. The same logic applies to <code>DependencyB&lt;…,…&gt;</code>, which has two generic parameters.</p>
+<h2 id="usage">Usage</h2>
+<p>Fortunately, C# doesn't allow the use of unbound generic types except in the <code>typeof</code> operator. This makes the use of implementation instance injections straightforward:</p>
+<pre><code class="language-csharp">internal class Dependency&lt;T0&gt; { }
+
+internal class DependencyHolder
+{
+    internal DependencyHolder(Dependency&lt;int&gt; dependency) { }
+}
+</code></pre>
+<p>Generic interface instance injections become more interesting. Straightforward usage is only possible for cases where each of the implementation types' generic parameters can be determined based on the interface type. For example:</p>
+<pre><code class="language-csharp">public interface IInterface&lt;T0, T1&gt; { }
+
+internal class Dependency&lt;T0, T1&gt; : IInterface&lt;T1, T0&gt; { }
+
+internal class DependencyHolder
+{
+    internal DependencyHolder(IInterface&lt;int, string&gt; dependency) { } // A Dependency&lt;string, int&gt; instance
+}
+</code></pre>
+<p>Cases with unspecified generic type parameters are supported by DIE. However, more specialized configuration would be required, as described in the next section …</p>
+<h2 id="unspecified-generic-type-parameters-with-interface-injections">Unspecified Generic Type Parameters With Interface Injections</h2>
+<p>There are situations where DIE can't automatically determine a generic type parameter for an implementation when injecting through an interface. Here is a minimal example:</p>
+<pre><code class="language-csharp">public interface IInterface&lt;T&gt; { }
+
+internal class Dependency&lt;T0, T1&gt; : IInterface&lt;T1&gt; { }
+
+internal class DependencyHolder
+{
+    internal DependencyHolder(IInterface&lt;int&gt; dependency) { } // What should be put into T0?
+}
+</code></pre>
+<p>So, in this example, if DIE needs to resolve <code>DependencyHolder</code> and <code>Dependency&lt;T0, T1&gt;</code> is the only implementation of <code>Interface&lt;T&gt;</code>, then it is clear that <code>T1</code> will be assigned <code>int</code>. However, in this situation <code>T0</code> can't be resolved. </p>
+<p>To resolve such situations, DIE provides a configuration feature. You can make a generic type parameter choice for instance injections (singular) or a generic type parameter collection choice for collection injections. Both are configured by implementation type. You can also mix these into types of choices. If you make only a singular choice, then it's also selected as a singular choice for collection injections. If you configure a single type in the collection choice, and don't configure a single choice, then it will be selected for instance injections. </p>
+<p>To resolve the example, the following configuration example can be applied:</p>
+<pre><code class="language-csharp">[GenericParameterChoice(typeof(Dependency&lt;,&gt;), &quot;T0&quot;, typeof(string))]
+</code></pre>
+<p>If you want to add type substitution for collection injection, you can use the following configuration:</p>
+<pre><code class="language-csharp">[GenericParameterSubstitutesChoice(typeof(Dependency&lt;,&gt;), &quot;T0&quot;, typeof(int), typeof(byte))]
+</code></pre>
+<p>With these two configurations in place, an <code>IReadOnlyList&lt;IInterface&lt;int&gt;&gt;</code> collection injection will contain a <code>Dependency&lt;string, int&gt;</code>, a <code>Dependency&lt;int, int&gt;</code>, and a <code>Dependency&lt;byte, int&gt;</code> instance.</p>
+<p>Let's consider another example:</p>
+<pre><code class="language-csharp">public interface IInterface { }
+
+internal class Dependency&lt;T0, T1&gt; : IInterface { }
+
+internal class DependencyHolder
+{
+    internal DependencyHolder(IReadOnlyList&lt;IInterface&gt; dependencies) { }
+}
+</code></pre>
+<p>And the following configuration accordingly:</p>
+<pre><code class="language-csharp">[GenericParameterSubstitutesChoice(typeof(Dependency&lt;,&gt;), &quot;T0&quot;, typeof(int), typeof(byte))]
+[GenericParameterSubstitutesChoice(typeof(Dependency&lt;,&gt;), &quot;T1&quot;, typeof(string), typeof(long))]
+</code></pre>
+<p>In this example, <code>DependencyHolder</code> gets a collection injection with one instance of each of the types <code>Dependency&lt;int, string&gt;</code>, <code>Dependency&lt;int, long&gt;</code>, <code>Dependency&lt;byte, string&gt;</code>, and <code>Dependency&lt;byte, long&gt;</code>. This instantiates every possible combination of configured and open generic parameters.</p>
+<p>If the collection choices are used excessively, the numbers can quickly become large. Consider a class <code>Dependency&lt;T0, T1, T2, T3&gt;</code> that implements <code>IInterface</code> with each generic parameter configured with five types. A collection injection would contain <code>5 * 5 * 5 * 5 = 625</code> instances. Note that this will imply code generation for all of them and(!) their own dependencies.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../async-support/" class="btn btn-neutral float-left" title="Async Support"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../decorators-composites/" class="btn btn-neutral float-right" title="Decorators & Composites">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../async-support/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../decorators-composites/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

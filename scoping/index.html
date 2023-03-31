@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="http://die.mrmeeseeks.net/scoping/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Scoping - MrMeeseeks.DIE</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Scoping";
+        var mkdocs_page_input_path = "scoping.md";
+        var mkdocs_page_url = "/scoping/";
+      </script>
+    
+    <script src="../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> MrMeeseeks.DIE
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../getting-started/">Getting Started</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../configuration/">Configuration</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../naming-rules/">Naming Rules</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">Scoping</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#how-to-use-scopes">How to use scopes?</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#custom-scopes">Custom Scopes</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#scope-instances">Scope Instances</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#use-transient-scope-instances-sparingly">Use Transient Scope Instances Sparingly</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#configuration-restrictions">Configuration Restrictions</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../user-defined-elements/">User-defined Elements</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../disposal/">Disposal</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../injections/">Injections</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../async-support/">Async Support</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../generics-support/">Generics Support</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../decorators-composites/">Decorators & Composites</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../initializers/">Initializers</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../glossary/">Glossary</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">MrMeeseeks.DIE</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>Scoping</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="scoping">Scoping</h1>
+<p>Scoping is a means of subdividing the container. With DIE, there are several reasons to subdivide into scopes:</p>
+<ul>
+<li><strong>Configuration</strong> Scopes can be used to change configurations at the container level. For example, you can use different implementation choices, and scopes can have their own custom elements such as factories. Almost any configuration can be changed at the scope level.</li>
+<li><strong>Instance Sharing</strong> Instances can be shared for scopes instead of the whole container.</li>
+<li><strong>Collective Disposal</strong> Scopes have also their own disposal management. This means that managed disposals instantiated in a scope will be disposed of when the scope is disposed of. Special scopes, called "transient scopes", can be used to decouple the disposal from the container disposal and be disposed of eagerly.</li>
+</ul>
+<h2 id="how-to-use-scopes">How to use scopes?</h2>
+<p>The answer to this must be twofold. One is to configure scopes, and the other is to indirectly spawn scopes in the codebase wherever you want.</p>
+<p>Take this example, which includes both sides of scope usage.</p>
+<pre><code class="language-csharp">internal interface IDependency {}
+
+internal class DependencyContainer : IDependency {}
+
+internal class DependencyTransientScope : IDependency {}
+
+internal class DependencyScope : IDependency {}
+
+internal class TransientScope : ITransientScopeRoot
+{
+    public TransientScope(IDependency dependency) =&gt; Dependency = dependency;
+
+    public IDependency Dependency { get; }
+}
+
+internal class Scope : IScopeRoot
+{
+    public Scope(IDependency dependency) =&gt; Dependency = dependency;
+
+    public IDependency Dependency { get; }
+}
+
+[TransientScopeRootAbstractionAggregation(typeof(ITransientScopeRoot))]
+[ScopeRootAbstractionAggregation(typeof(IScopeRoot))]
+[CreateFunction(typeof(IDependency), &quot;Create0&quot;)]
+[CreateFunction(typeof(TransientScope), &quot;Create1&quot;)]
+[CreateFunction(typeof(Scope), &quot;Create2&quot;)]
+[FilterImplementationAggregation(typeof(DependencyScope))]
+[FilterImplementationAggregation(typeof(DependencyTransientScope))]
+internal sealed partial class Container
+{
+    [FilterImplementationAggregation(typeof(DependencyContainer))]
+    [ImplementationAggregation(typeof(DependencyTransientScope))]
+    private sealed partial class DIE_DefaultTransientScope
+    {
+
+    }
+
+    [FilterImplementationAggregation(typeof(DependencyContainer))]
+    [ImplementationAggregation(typeof(DependencyScope))]
+    private sealed partial class DIE_DefaultScope
+    {
+
+    }
+}
+</code></pre>
+<p>Let's start with configuration. Implicitly, there's always at least one configuration for a default scope and one for a default transient scope. If you want to customize them, you can do so by declaring a nested class <code>DIE_DefaultScope</code> and/or a nested class <code>DIE_DefaultTransientScope</code> in the container class. In the example above, we use the default scope configuration classes to filter and aggregate implementations in such a way that the normal scope and the transient scope would map a different implementation to the <code>IDependency</code> interface. The nested scope configuration classes must be <code>private</code>, <code>sealed</code>, and <code>partial</code>.</p>
+<p>The other part of using scopes is to define from where in your codebase to start a new scope, and which scope to start. This is done by declaring scope roots. In the example, the marker interface <code>IScopeRoot</code> is used to mark the implementation <code>Scope</code> as the scope root. In general, you could just inject the scope root into any implementation to start a scope there. In this minimalist example, the return type of the create function is the scope root. Therefore, the scope will be the first thing created.</p>
+<h3 id="custom-scopes">Custom Scopes</h3>
+<p>In addition to the default scope and default transient scope, you can also configure custom scopes for scope roots of your choice. See this example:</p>
+<pre><code class="language-csharp">[CreateFunction(typeof(IInterface), &quot;Create0&quot;)]
+[CreateFunction(typeof(TransientScopeRoot), &quot;Create1&quot;)]
+[CreateFunction(typeof(TransientScopeRootSpecific), &quot;Create2&quot;)]
+[CreateFunction(typeof(ScopeRoot), &quot;Create3&quot;)]
+[CreateFunction(typeof(ScopeRootSpecific), &quot;Create4&quot;)]
+[DecoratorSequenceChoice(typeof(IInterface), typeof(IInterface), typeof(ContainerDecorator))]
+internal sealed partial class Container
+{
+    [DecoratorSequenceChoice(typeof(IInterface), typeof(IInterface), typeof(TransientScopeDecorator))]
+
+    [CustomScopeForRootTypes(typeof(TransientScopeRootSpecific1))]
+    private sealed partial class DIE_TransientScope_A
+    {
+
+    }
+
+    [DecoratorSequenceChoice(typeof(IInterface), typeof(IInterface), typeof(TransientScopeSpecificDecorator))]
+
+    [CustomScopeForRootTypes(typeof(TransientScopeRootSpecific0), typeof(TransientScopeRootSpecific2))]
+    private sealed partial class DIE_TransientScope_B
+    {
+
+    }
+
+    [DecoratorSequenceChoice(typeof(IInterface), typeof(IInterface), typeof(ScopeDecorator))]
+
+    [CustomScopeForRootTypes(typeof(ScopeRootSpecific1))]
+    private sealed partial class DIE_Scope_A
+    {
+
+    }
+
+    [DecoratorSequenceChoice(typeof(IInterface), typeof(IInterface), typeof(ScopeSpecificDecorator))]
+
+    [CustomScopeForRootTypes(typeof(ScopeRootSpecific0), typeof(ScopeRootSpecific1))]
+    private sealed partial class DIE_Scope_B
+    {
+
+    }
+}
+</code></pre>
+<p>Custom (transient) scopes are declared similarly to the default (transient) scope. However, the custom transient scope identifier must start with <code>DIE_TransientScope</code> and the custom scope identifier must start with <code>DIE_Scope</code>. Also, all custom (transient) scopes must have at least one <code>CustomScopeForRootTypesAttribute</code> attribute with at least one type parameter. The type parameters must be (transient) scope root implementations. On a match, DIE will use the custom (transient) scope instead of the default.</p>
+<p>It is possible to define a different (transient) scope for each individual (transient) scope root. However, keep in mind that code must be generated for each distinct (transient) scope. This isn't necessarily a bad thing, you may decide it's worth it for your project.</p>
+<h2 id="scope-instances">Scope Instances</h2>
+<p>Similar to container instances, which are guaranteed to be created once and shared across the entire container, you can configure implementations to be treated as scope instances. As such, they're created once per scope and shared across the scope.</p>
+<p>In addition to scope instances, there are also transient scope instances. However, the latter have one important difference: they are shared by the entire transient scope and all ordinary scopes created directly or transitively from the transient scope. </p>
+<p>Containers can also create scope and transient scope instances. This means that in resolution situations where no scope or transient scope has yet been created, the container can effectively act as one. The same principle applies to transient scopes and scope instances.</p>
+<h3 id="use-transient-scope-instances-sparingly">Use Transient Scope Instances Sparingly</h3>
+<p>Transient scope instances are by far the most complex compared to container and scope instances. To understand this, let's first deduce why container instances are simpler.</p>
+<p>Scopes get an instance of the container injected. This instance is then used by the scope to access the container instances. This is simple because all scopes know only one instance of the container type, so it is very clear what to use.</p>
+<p>However, the same situation becomes very unclear with transient scopes. A scope can be created under a transient scope or under the container. So when a scope needs to access a transient scope instance, which type should be used? </p>
+<p>The approach taken for DIE was to introduce an interface for accessing transient scope instances. So instead of a concrete type, scopes get an instance of an interface type injected, so the scope doesn't have to care what type its big parent has. This interface must be implemented by all different transient scopes and by the container. However, this means that, for example, the container must be able to generate functions for transient scope instances even if they aren't used in practice. The same problem applies to all different transient scopes.</p>
+<p>Because of all this, transient scope instances can be difficult to work with, and they'll result in significantly more generated code than the other types of shared instances. Therefore, it is recommended to use transient scope instances only when you really need them (i.e., when you need to share an instance in the transient scope/container and all its underlying scopes).</p>
+<h2 id="configuration-restrictions">Configuration Restrictions</h2>
+<p>Configurations such as the container instance configuration only make sense on a container-wide basis. Therefore, they aren't allowed to be used on (transient) scopes. These configurations are</p>
+<ul>
+<li>Container instance</li>
+<li>Transient scope instance</li>
+<li>Transient scope root</li>
+<li>Scope root</li>
+</ul>
+<p>Any configurations (aggregation, filtering, implementation, abstraction) that affect these listed aspects aren't allowed on (transient) scopes.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../naming-rules/" class="btn btn-neutral float-left" title="Naming Rules"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../user-defined-elements/" class="btn btn-neutral float-right" title="User-defined Elements">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../naming-rules/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../user-defined-elements/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

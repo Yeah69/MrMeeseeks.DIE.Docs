@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="http://die.mrmeeseeks.net/injections/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Injections - MrMeeseeks.DIE</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Injections";
+        var mkdocs_page_input_path = "injections.md";
+        var mkdocs_page_url = "/injections/";
+      </script>
+    
+    <script src="../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> MrMeeseeks.DIE
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../getting-started/">Getting Started</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../configuration/">Configuration</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../naming-rules/">Naming Rules</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../scoping/">Scoping</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../user-defined-elements/">User-defined Elements</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../disposal/">Disposal</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">Injections</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#instance-injection">Instance Injection</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#implementations">Implementations</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#abstraction">Abstraction</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#nullability">Nullability</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#generics">Generics</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#collection-injection">Collection Injection</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#factory-injection">Factory Injection</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#func">Func</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#lazy">Lazy</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#scope-injection">Scope Injection</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#valuetuple">(Value)Tuple</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../async-support/">Async Support</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../generics-support/">Generics Support</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../decorators-composites/">Decorators & Composites</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../initializers/">Initializers</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../glossary/">Glossary</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">MrMeeseeks.DIE</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>Injections</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="injections">Injections</h1>
+<p>DIE supports several types of injections:</p>
+<ul>
+<li>Instance injection</li>
+<li>Collection injection</li>
+<li>Factory injection</li>
+<li>Scope injection</li>
+</ul>
+<p>This page explains how to work with these injections.</p>
+<h2 id="instance-injection">Instance Injection</h2>
+<p>Instance injections are ordinary dependency injections. That is, you declare what type you need, and you'll get a single instance of that type. Instance injections can be divided into two different parts. One is injection of implementation types, and the other is injection of abstraction types. Understanding DIE's definition of an implementation type and an abstraction type is necessary to understand when to use which injection behavior. Definition:</p>
+<ul>
+<li>Implementation types<ul>
+<li>Non-abstract class types<ul>
+<li>Including non-abstract record types</li>
+</ul>
+</li>
+<li>Struct types<ul>
+<li>Including struct record types</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Abstraction types<ul>
+<li>Interface types</li>
+<li>Abstract class types<ul>
+<li>Including abstract record types</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="implementations">Implementations</h3>
+<p>Example:</p>
+<pre><code class="language-csharp">internal record Dependency;
+
+internal class DependencyHolder
+{
+    internal readonly Dependency _dependency;
+    internal DependencyHolder(Dependency dependency) =&gt; // is an instance of type Dependency
+        _dependency = dependency;
+}
+</code></pre>
+<p>By default, whenever an implementation type needs to be injected, DIE will inject an instance of exactly that type. This is true even if the implementation type is a parent class that has inheriting child classes.</p>
+<p>However, there is a way to modify this behavior by configuring implementation choices. Alternatively, user-defined factories can be used to change this behavior as well.</p>
+<h3 id="abstraction">Abstraction</h3>
+<p>Example:</p>
+<pre><code class="language-csharp">internal interface IDependency {}
+
+internal record Dependency : IDependency;
+
+internal class DependencyHolder
+{
+    internal readonly IDependency _dependency;
+    internal DependencyHolder(IDependency dependency) =&gt; // is an instance of type Dependency
+        _dependency = dependency;
+}
+</code></pre>
+<p>Whenever an abstraction type (interface or abstract class) needs to be injected, DIE will by default use the only known implementation type that implements the abstraction in its place. </p>
+<p>If multiple implementations are known, then using configuration features such as implementation choice or a user-defined factory is mandatory to uniquely select an implementation.</p>
+<h3 id="nullability">Nullability</h3>
+<p>Example:</p>
+<pre><code class="language-csharp">internal interface IDependency {}
+
+internal class DependencyHolder
+{
+    internal readonly IDependency? _dependency;
+    internal DependencyHolder(IDependency? dependency) =&gt; // is null
+        _dependency = dependency;
+}
+</code></pre>
+<p>If the dependency type is a nullable abstraction type and DIE can't choose a unique implementation (no implementations; multiple implementations; no implementation choice), then DIE will inject the null value instead.</p>
+<h3 id="generics">Generics</h3>
+<p>Example:</p>
+<pre><code class="language-csharp">internal record Dependency&lt;T&gt;;
+
+internal class DependencyHolder
+{
+    internal readonly Dependency&lt;int&gt; _dependency;
+    internal DependencyHolder(Dependency&lt;int&gt; dependency) =&gt; // is an instance of type Dependency&lt;int&gt;
+        _dependency = dependency;
+}
+</code></pre>
+<p>Instance injection supports generic types (see <a href="../generics-support/">the generics support page</a>). </p>
+<h2 id="collection-injection">Collection Injection</h2>
+<p>Example:</p>
+<pre><code class="language-csharp">internal interface IDependency {}
+
+internal record DependencyA : IDependency;
+
+internal record DependencyB : IDependency;
+
+internal class DependencyHolder
+{
+    internal readonly IReadOnlyList&lt;IDependency&gt; _dependencies;
+    internal DependencyHolder(IReadOnlyList&lt;IDependency&gt; dependencies) =&gt; // is a collection of a DependencyA- and a DependencyB-instance
+        _dependencies = dependencies;
+}
+</code></pre>
+<p>Collection injections aren't limited to injecting a single implementation. Therefore, the injected instance will be a collection type that contains instances for each different implementation of its member type as items.</p>
+<p>The currently supported collection types are </p>
+<ul>
+<li><code>IEnumerable&lt;…&gt;</code></li>
+<li><code>IAsyncEnumerable&lt;…&gt;</code></li>
+<li>Arrays</li>
+<li><code>IList&lt;…&gt;</code></li>
+<li><code>ICollection&lt;…&gt;</code></li>
+<li><code>ReadOnlyCollection&lt;…&gt;</code></li>
+<li><code>IReadOnlyCollection&lt;…&gt;</code></li>
+<li><code>IReadOnlyList&lt;…&gt;</code></li>
+<li><code>ArraySegment&lt;…&gt;</code></li>
+<li><code>ConcurrentBag&lt;…&gt;</code></li>
+<li><code>ConcurrentQueue&lt;…&gt;</code></li>
+<li><code>ConcurrentStack&lt;…&gt;</code></li>
+<li><code>HashSet&lt;…&gt;</code></li>
+<li><code>LinkedList&lt;…&gt;</code></li>
+<li><code>List&lt;…&gt;</code></li>
+<li><code>Queue&lt;…&gt;</code></li>
+<li><code>SortedSet&lt;…&gt;</code></li>
+<li><code>Stack&lt;…&gt;</code></li>
+<li><code>ImmutableArray&lt;…&gt;</code></li>
+<li><code>ImmutableHashSet&lt;…&gt;</code></li>
+<li><code>ImmutableList&lt;…&gt;</code></li>
+<li><code>ImmutableQueue&lt;…&gt;</code></li>
+<li><code>ImmutableSortedSet&lt;…&gt;</code></li>
+<li><code>ImmutableStack&lt;…&gt;</code></li>
+</ul>
+<p>If you want to restrict the implementations of collection injection that are used, you can use an implementation collection choice as a configuration option.</p>
+<p><code>IEnumerable&lt;…&gt;</code> and <code>IAsyncEnumerable&lt;…&gt;</code> injections are lazy evaluated. That means, the item instances are created one at a time as they get pulled out by iteration. However, there is one exception to the lazy evaluation. That is with an <code>IEnumerable&lt;…&gt;</code> injection which is asynchronous, meaning that it needs to perform one or more awaits. In that case the items will be gathered in an array and returned as <code>IEnumerable&lt;…&gt;</code>.</p>
+<p>You can also combine the collection types with <code>ValueTask&lt;…&gt;</code> or <code>Task&lt;…&gt;</code> (e.g. <code>ValueTask&lt;IReadOnlyList&lt;IDependency&gt;&gt;</code>), if you might need to wrap asynchronous resolutions of one or multiple implementations.</p>
+<h2 id="factory-injection">Factory Injection</h2>
+<p>Instead of injecting the dependency directly with factory injections, you have the option to inject generated factories that will create the dependencies on demand. </p>
+<p>DIE supports <code>Func&lt;…&gt;</code> and <code>Lazy&lt;…&gt;</code> as factory wrapper types. The created dependency type (the last generic parameter for <code>Func&lt;…&gt;</code> and the only generic parameter for <code>Lazy&lt;…&gt;</code>) can be any other type of injection (i.e. instance, collection, or scope injection).</p>
+<p>Once the scope in which the factory was instantiated is disposed of, no further use of the factory is allowed. If the factory is still called from a disposed scope, it will throw an exception.</p>
+<h3 id="func">Func</h3>
+<p>Example:</p>
+<pre><code class="language-csharp">internal record Dependency(int Number, string Text);
+
+internal class DependencyHolder
+{
+    internal readonly Func&lt;int, string, Dependency&gt; _dependencyFactory;
+    internal DependencyHolder(Func&lt;int, string, Dependency&gt; dependencyFactory) =&gt; // is a factory that creates an instance of type Dependency
+        _dependencyFactory = dependencyFactory;
+}
+</code></pre>
+<p>The parameters of a <code>Func&lt;…&gt;</code> factory are also supported. The parameters are used as overrides for the remaining resolution, if not overridden again later. The override semantic is inspired by another great DI container: Shout out to <a href="https://github.com/dadhi/DryIoc">DryIoc</a>!</p>
+<h3 id="lazy">Lazy</h3>
+<p>Example:</p>
+<pre><code class="language-csharp">internal record Dependency(int Number, string Text);
+
+internal class DependencyHolder
+{
+    internal readonly Lazy&lt;Dependency&gt; _dependency;
+    internal DependencyHolder(Lazy&lt;Dependency&gt; dependency) =&gt; // is a lazy object that creates an instance of type Dependency upon first usage
+        _dependency = dependency;
+}
+</code></pre>
+<p>While technically not being a functor ("first-citizen function") itself, <code>Lazy&lt;…&gt;</code>s get a functor injected which they then use. In DIE, <code>Lazy&lt;…&gt;</code>s are interpreted as parameterless factories that can only create a single instance, but where the creation can be delayed until the first use.</p>
+<h2 id="scope-injection">Scope Injection</h2>
+<p>Example:</p>
+<pre><code class="language-csharp">internal record Dependency;
+
+internal record ScopeRoot(Dependency Dependency) : IScopeRoot;
+
+internal class DependencyHolder
+{
+    internal readonly ScopeRoot _scopeRoot;
+    internal DependencyHolder(ScopeRoot scopeRoot) =&gt; // Starts a new scope in which the ScopeRoot- and the Dependency-instance is created
+        _scopeRoot = scopeRoot;
+}
+</code></pre>
+<p>Scope injection is very similar to instance injection from a usage perspective. The difference is that scope injection starts a new (transient) scope and creates the injected instance (called the scope root) from it. For a more complete explanation, see the <a href="../scoping/">scoping page</a>.</p>
+<h2 id="valuetuple">(Value)Tuple</h2>
+<p>Example:</p>
+<pre><code class="language-csharp">internal record DependencyA;
+
+internal record DependencyB;
+
+internal class DependencyHolder
+{
+    internal readonly (DependencyA, DependencyB) _tuple;
+    internal DependencyHolder((DependencyA, DependencyB) tuple) =&gt; // is a tuple of a DependencyA- and a DependencyB-instance
+        _tuple = tuple;
+}
+</code></pre>
+<p>Tuple injection can be seen as a special case, because it can be understood as a combination of injections. For each type of the tuple, a separate resolution is started, very similar to what would have happened in an ordinary dependency injection. The result of these resolutions is assembled into the tuple. DIE supports <code>Tuple&lt;…&gt;</code> and both the syntax and non-syntax <code>ValueTuple&lt;…&gt;</code>.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../disposal/" class="btn btn-neutral float-left" title="Disposal"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../async-support/" class="btn btn-neutral float-right" title="Async Support">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../disposal/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../async-support/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

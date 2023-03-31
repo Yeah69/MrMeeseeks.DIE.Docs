@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="http://die.mrmeeseeks.net/configuration/generics/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Decorator/Composite Configurations - MrMeeseeks.DIE</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Decorator/Composite Configurations";
+        var mkdocs_page_input_path = "configuration/generics.md";
+        var mkdocs_page_url = "/configuration/generics/";
+      </script>
+    
+    <script src="../../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> MrMeeseeks.DIE
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../getting-started/">Getting Started</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../">Configuration</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../naming-rules/">Naming Rules</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../scoping/">Scoping</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../user-defined-elements/">User-defined Elements</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../disposal/">Disposal</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../injections/">Injections</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../async-support/">Async Support</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../generics-support/">Generics Support</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../decorators-composites/">Decorators & Composites</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../initializers/">Initializers</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../glossary/">Glossary</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">MrMeeseeks.DIE</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>Decorator/Composite Configurations</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="decoratorcomposite-configurations">Decorator/Composite Configurations</h1>
+<h2 id="purpose">Purpose</h2>
+<p>In general, it is possible for a generic parameter to be left open at resolution. If you configure generic parameter substitutes (for collections) and/or singular choices (for singular injections), then the implementation in which the configured generic parameter would otherwise remain open can still be resolved.</p>
+<h2 id="attributes">Attributes</h2>
+<ul>
+<li><strong>GenericParameterSubstitutesChoiceAttribute</strong> Aggregates generic type substitutes for the given unbound generic implementation and the selected generic parameter.</li>
+</ul>
+<pre><code class="language-csharp">[GenericParameterSubstitutesChoice(typeof(Implementation&lt;,&gt;), &quot;T0&quot;, typeof(int), typeof(string))]
+</code></pre>
+<ul>
+<li><strong>FilterGenericParameterSubstitutesChoiceAttribute</strong> Discards generic type substitutions for the given unbound generic implementation and the selected generic parameter.</li>
+</ul>
+<pre><code class="language-csharp">[FilterGenericParameterSubstitutesChoice(typeof(Implementation&lt;,&gt;), &quot;T0&quot;)]
+</code></pre>
+<ul>
+<li><strong>GenericParameterChoiceAttribute</strong> Specifies the generic type choice for the given unbound generic implementation and the selected generic parameter. For collections, this choice is automatically added.</li>
+</ul>
+<pre><code class="language-csharp">[GenericParameterChoice(typeof(Implementation&lt;,&gt;), &quot;T0&quot;, typeof(int))]
+</code></pre>
+<ul>
+<li><strong>FilterGenericParameterChoiceAttribute</strong> Discards the generic type choice for the given unbound generic implementation and the selected generic parameter.</li>
+</ul>
+<pre><code class="language-csharp">[FilterGenericParameterChoice(typeof(Implementation&lt;,&gt;), &quot;T0&quot;)]
+</code></pre>
+<h2 id="recommendations">Recommendations</h2>
+<ul>
+<li>Be aware that if a generic implementation is resolved into a collection (for example, <code>IReadOnlyList&lt;…&gt;</code>) with multiple open generic type parameters, DIE will resolve closed versions of the implementation for all possible combinations of substitutes. For example, if an implementation has three open generic parameters, each of which has five substitutes configured, then <code>5 * 5 * 5 = 125</code> closed versions of the implementation will be resolved. The number of closed implementations can grow quickly, so it is recommended to be cautious.</li>
+<li>The singular choices (from <code>GenericParameterChoice</code>) are automatically interpreted as additional substitutes for collections. So if you have a <code>GenericParameterChoice</code> and a <code>GenericParameterSubstitutesChoice</code> for the same implementation/type parameter combination, then it's not necessary to have the chosen type from the <code>GenericParameterChoice</code> in the <code>GenericParameterSubstitutesChoice</code> as well.</li>
+</ul>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
